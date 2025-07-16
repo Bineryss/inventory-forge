@@ -1,17 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace System.Inventory
 {
-    public class Inventory: MonoBehaviour
+
+    public interface IInventoryDataSource
     {
-        [SerializeField] InventoryView view;
-        [SerializeField] List<ItemInstance> startingItems = new();
-
-        InventoryController controller;
-
-        void Awake()
-        {
-            controller = new InventoryController.Builder(view).Items(startingItems).Build();
-        }
+        ObservableList<ItemInstance> DataSource { get; }
     }
+
+    public class Inventory : MonoBehaviour, IInventoryDataSource
+    {
+        private static ObservableList<ItemInstance> dataSource;
+
+        [SerializeField] private List<ItemInstance> inventory = new();
+        public ObservableList<ItemInstance> DataSource => dataSource == null ? dataSource = new ObservableList<ItemInstance>(inventory) : dataSource;
+    }
+
+
 }

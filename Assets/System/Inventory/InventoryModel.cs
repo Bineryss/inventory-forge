@@ -13,13 +13,9 @@ namespace System.Inventory
             remove => items.ValueChanged -= value;
         }
 
-        public InventoryModel(IEnumerable<ItemInstance> itemDetails)
+        public InventoryModel(ObservableList<ItemInstance> itemDetails)
         {
-            foreach (var detail in itemDetails)
-            {
-                items.Add(detail);
-            }
-
+            items = itemDetails;
         }
 
         public ItemInstance Get(int index) => items[index];

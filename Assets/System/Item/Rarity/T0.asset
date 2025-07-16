@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: T0
   m_EditorClassIdentifier: 
   score: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0.3886792, g: 0.3886792, b: 0.3886792, a: 1}

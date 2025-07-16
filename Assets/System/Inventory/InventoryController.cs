@@ -60,14 +60,14 @@ namespace System.Inventory
         public class Builder
         {
             InventoryView view;
-            IEnumerable<ItemInstance> itemDetails;
+            IInventoryDataSource itemDetails;
 
             public Builder(InventoryView view)
             {
                 this.view = view;
             }
 
-            public Builder Items(IEnumerable<ItemInstance> itemDetails)
+            public Builder InventoryDataSource(IInventoryDataSource itemDetails)
             {
                 this.itemDetails = itemDetails;
                 return this;
@@ -76,8 +76,8 @@ namespace System.Inventory
             public InventoryController Build()
             {
                 InventoryModel model = itemDetails != null
-                ? new InventoryModel(itemDetails)
-                : new InventoryModel(new List<ItemInstance>());
+                ? new InventoryModel(itemDetails.DataSource)
+                : new InventoryModel(new ObservableList<ItemInstance>());
 
                 return new InventoryController(view, model);
             }
