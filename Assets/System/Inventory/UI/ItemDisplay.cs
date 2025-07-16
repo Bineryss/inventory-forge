@@ -1,10 +1,11 @@
+using UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace System.Inventory
 {
     [UxmlElement]
-    public partial class ItemDisplay : VisualElement
+    public partial class ItemDisplay : VisualElement, IClickableElement<string, ItemDisplayData>
     {
         static readonly VisualTreeAsset asset = UnityEngine.Resources.Load<VisualTreeAsset>("item");
 

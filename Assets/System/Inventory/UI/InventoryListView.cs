@@ -1,22 +1,32 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UIElements;
 
 namespace System.Inventory
 {
-    [UxmlElement]
-    public partial class InventoryListView : VisualElement
+    public class InventoryListView : VisualElement
     {
         public event Action<string> OnElementClick = delegate { };
+        public int Cols { get; set; } = 5;
 
         private readonly ListView listView;
-        private List<ItemDisplayData> internalDataSource = new();
+        private List<List<ItemDisplayData>> internalDataSource = new();
         public List<ItemDisplayData> Data
         {
             set
             {
                 if (value == null) return;
-                internalDataSource = value;
-                listView.itemsSource = value;
+                int row = 0;
+                List<List<ItemDisplayData>> listList = new();
+
+                while (row < value.Count)
+                {
+                    listList.Add(value.Skip(row).Take(Cols).ToList());
+                    row += Cols;
+                }
+
+                internalDataSource = listList;
+                listView.itemsSource = listList;
                 // listView.Rebuild();
             }
         }
@@ -26,13 +36,13 @@ namespace System.Inventory
             {
                 makeItem = () =>
                 {
-                    ItemDisplay element = new();
-                    element.OnClick += (value) => OnElementClick.Invoke(value);
+                    InventoryRow element = new();
+                    element.OnElementClick += (value) => OnElementClick.Invoke(value);
                     return element;
                 },
                 bindItem = (element, index) =>
                     {
-                        ((ItemDisplay)element).Set(internalDataSource[index]);
+                        ((InventoryRow)element).Set(internalDataSource[index]);
                     },
                 itemsSource = internalDataSource,
                 virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
