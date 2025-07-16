@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine.UIElements;
 
 namespace System.Inventory
@@ -34,20 +35,33 @@ namespace System.Inventory
         {
             listView = new()
             {
-                makeItem = () =>
-                {
-                    InventoryRow element = new();
-                    element.OnElementClick += (value) => OnElementClick.Invoke(value);
-                    return element;
-                },
+                makeItem = MakeItem,
                 bindItem = (element, index) =>
                     {
-                        ((InventoryRow)element).Set(internalDataSource[index]);
+                        if (element is not HorizontalList<ItemDisplay, ItemDisplayData> itemEl) return;
+
+                        itemEl.Set(internalDataSource[index]);
                     },
                 itemsSource = internalDataSource,
                 virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
             };
             Add(listView);
+        }
+
+        private VisualElement MakeItem()
+        {
+            HorizontalList<ItemDisplay, ItemDisplayData> element = new(() =>
+            {
+                ItemDisplay element = new();
+                element.OnClick += (value) => OnElementClick.Invoke(value);
+                element.style.marginRight = 4;
+                return element;
+            },
+            (element, data) =>
+            {
+                element.Set(data);
+            });
+            return element;
         }
     }
 }

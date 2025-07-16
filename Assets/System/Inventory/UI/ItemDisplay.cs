@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace System.Inventory
 {
     [UxmlElement]
-    public partial class ItemDisplay : VisualElement, IClickableElement<string, ItemDisplayData>
+    public partial class ItemDisplay : VisualElement, HorizontalListItem<string, ItemDisplayData>
     {
         static readonly VisualTreeAsset asset = UnityEngine.Resources.Load<VisualTreeAsset>("item");
 
@@ -47,5 +47,7 @@ namespace System.Inventory
         {
             OnClick.Invoke(id);
         }
+
+        public VisualElement CreateElement() => new();
     }
 }
