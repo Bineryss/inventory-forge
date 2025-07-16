@@ -10,14 +10,12 @@ namespace System.Inventory
     {
         public event Action<string> OnItemClick = delegate { };
 
-        private List<ItemDisplayData> data = new();
         public void UpdateData(List<ItemDisplayData> data)
         {
-            this.data = data;
-            listView.itemsSource = data;
+            listView.Data = data;
         }
 
-        private ListView listView;
+        private InventoryListView listView;
         public override IEnumerator InitializeView()
         {
             Root.Clear();
@@ -27,20 +25,7 @@ namespace System.Inventory
             Root.Add(container);
 
             listView = new();
-            listView.makeItem = () =>
-            {
-                ItemDisplay element = new();
-                element.OnClick += OnItemClick;
-                return element;
-            };
-            listView.bindItem = (element, index) =>
-            {
-                ItemDisplay convEl = element as ItemDisplay;
-                convEl.Set(listView.itemsSource[index] as ItemDisplayData);
-            };
-            listView.itemsSource = data;
-            listView.virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight;
-            listView.fixedItemHeight = 0;
+            listView.OnElementClick += (value) => OnItemClick.Invoke(value);
             container.Add(listView);
 
             yield return null;

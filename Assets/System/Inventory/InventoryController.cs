@@ -43,10 +43,6 @@ namespace System.Inventory
 
         private void RefreshView()
         {
-            foreach (var item in model.items)
-            {
-                Debug.Log($"item: {item.detail.icon}-{item.quantity}");
-            }
             view.UpdateData(model.items.Select(item => new ItemDisplayData()
             {
                 Id = item.Id,

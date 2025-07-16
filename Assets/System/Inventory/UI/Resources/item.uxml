@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Style.uss?fileID=7433441132597879392&amp;guid=a6d521b3fadde50499609e7c32dc6385&amp;type=3#Style" />
+    <ui:Button name="container" class="button-reset button" style="background-color: rgb(228, 228, 228); width: 100px; height: 100px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+        <ui:Label text="##" name="icon" style="-unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/Fonts/Bignoodletitling.ttf?fileID=12800000&amp;guid=ed9f3e4397236cc4e83ad76cec7083aa&amp;type=3#Bignoodletitling&quot;); font-size: 48px; -unity-font-style: normal; height: 61px;" />
+        <ui:Label text="#000" name="quantity" style="-unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/Fonts/Roboto.ttf?fileID=12800000&amp;guid=5a7e8af2bfca8ce41ab815fa1694cb83&amp;type=3#Roboto&quot;); font-size: 16px;" />
+    </ui:Button>
+</ui:UXML>

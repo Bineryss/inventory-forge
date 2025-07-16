@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,9 +6,11 @@ namespace System.Inventory
     [UxmlElement]
     public partial class ItemDisplay : VisualElement
     {
-        private readonly Button container;
-        private readonly Label icon;
-        private readonly Label quantity;
+        static readonly VisualTreeAsset asset = UnityEngine.Resources.Load<VisualTreeAsset>("item");
+
+        private Button Container => this.Q<Button>("container");
+        private Label Icon => this.Q<Label>("icon");
+        private Label Quantity => this.Q<Label>("quantity");
 
         public event Action<string> OnClick = delegate { };
 
@@ -17,37 +18,32 @@ namespace System.Inventory
 
         public ItemDisplay()
         {
-            container = new();
-            container.style.backgroundColor = Color.white;
-            container.clicked += HandleClick;
-            Add(container);
+            if (asset == null)
+            {
+                Debug.Log("⛔ Failed to load uxml file for Item!");
+                return;
+            }
 
-            icon = new() { text = "#" };
-            container.Add(icon);
+            asset.CloneTree(this);
 
-            quantity = new() { text = "#000" };
-            container.Add(quantity);
+            Container.clicked += HandleClick;
         }
 
         public void Set(string id, string icon, Color bgColor, int quantity)
         {
             this.id = id;
-            this.icon.text = icon;
-            container.style.backgroundColor = bgColor;
-            this.quantity.text = quantity.ToString();
+            Icon.text = icon;
+            Container.style.backgroundColor = bgColor;
+            Quantity.text = quantity.ToString();
         }
 
         public void Set(ItemDisplayData data)
         {
-            id = data.Id;
-            icon.text = data.Icon;
-            container.style.backgroundColor = data.BgColor;
-            quantity.text = data.Quantity.ToString();
+            Set(data.Id, data.Icon, data.BgColor, data.Quantity);
         }
 
         private void HandleClick()
         {
-            Debug.Log($"element clicked {id}");
             OnClick.Invoke(id);
         }
     }
