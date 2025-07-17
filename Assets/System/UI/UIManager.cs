@@ -25,8 +25,6 @@ namespace System.UI
 
         void Start()
         {
-            CraftingController cC = new(craftingView);
-
             StartCoroutine(menuView.InitializeView(TransitionTo));
             VisualElement rootContainer = document.rootVisualElement.Q("container");
 

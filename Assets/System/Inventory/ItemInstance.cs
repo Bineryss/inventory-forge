@@ -11,5 +11,11 @@ namespace System.Inventory
         public ItemDetail detail;
 
         public ItemInstance(ItemDetail detail) => this.detail = detail;
+        public ItemInstance(ItemInstance copy)
+        {
+            id = copy.Id;
+            quantity = copy.quantity;
+            detail = copy.detail;
+        }
     }
 }

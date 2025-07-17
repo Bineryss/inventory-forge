@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Inventory;
-using System.Linq;
 using System.UI;
 using UIElements;
 using UnityEngine;
@@ -22,15 +21,16 @@ namespace System.Crafting
         [SerializeField] private VisualTreeAsset asset;
         [SerializeField] private StyleSheet styleSheet;
 
-        public event Action<List<string>> OnCraftingClick = delegate { };
+        public event Action<string> OnItemSelect = delegate { };
+        public event Action<string> OnItemDeselect = delegate { };
+        public event Action OnCraftingClick = delegate { };
+        public event Action OnClearSelectionClick = delegate { };
 
         private VisualElement root;
-        private InventoryListView listView;
+        private InventoryListView inventoryList;
         private ItemDetailElement detailView;
         private HorizontalListElement<ItemDisplay, SelectedItemDisplayData> selectedList;
 
-        private List<SelectedItemDisplayData> selectedItems = new();
-        private List<ItemDisplayData> internalInventoryList = new();
         public IEnumerator InitializeView()
         {
             root ??= new();
@@ -41,10 +41,10 @@ namespace System.Crafting
             }
             asset.CloneTree(root);
 
-            listView = new();
-            listView.OnElementClick += (value) => SelectItem(value);
-            listView.style.flexGrow = 1;
-            InventoryList.Add(listView);
+            inventoryList = new();
+            inventoryList.OnElementClick += (value) => OnItemSelect.Invoke(value);
+            inventoryList.style.flexGrow = 1;
+            InventoryList.Add(inventoryList);
 
             Overlay.style.display = DisplayStyle.None;
             detailView = new();
@@ -56,7 +56,7 @@ namespace System.Crafting
                 () =>
                 {
                     ItemDisplay element = new();
-                    element.OnClick += (value) => Deselect(value);
+                    element.OnClick += (value) => OnItemDeselect.Invoke(value);
                     element.style.marginRight = 4;
                     return element;
                 },
@@ -72,34 +72,19 @@ namespace System.Crafting
             );
             SelectedList.Add(selectedList);
 
-            CraftingButton.clicked += () => OnCraftingClick.Invoke(selectedItems.Select(el => el.Id).ToList());
+            CraftingButton.clicked += () => OnCraftingClick.Invoke();
 
             yield return null;
         }
 
-        public void SelectItem(string id)
-        {
-            ItemDisplayData item = internalInventoryList.FirstOrDefault((el) => id.Equals(el.Id));
-            if (item == null) return;
-
-            selectedItems.Add(new SelectedItemDisplayData()
-            {
-                Id = item.Id,
-                Icon = item.Icon,
-                BgColor = item.BgColor
-            });
-            selectedList.Set(selectedItems);
-        }
-
-        public void Deselect(string id)
-        {
-            Debug.Log("deselcted item");
-        }
-
         public void UpdateInventory(List<ItemDisplayData> data)
         {
-            listView.Data = data;
-            internalInventoryList = data;
+            inventoryList.Data = data;
+        }
+
+        public void UpdateSelectedList(List<SelectedItemDisplayData> data)
+        {
+            selectedList.Set(data);
         }
 
         public void UpdateDetailData(ItemDisplayDetailData data)
