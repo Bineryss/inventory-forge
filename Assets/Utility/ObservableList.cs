@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Initializes a new instance of the ObservableList class that is empty
@@ -29,6 +30,11 @@ public interface IObservableList<T>
     /// Removes all items from the ObservableList.
     /// </summary>        
     void Clear();
+
+    /// <summary>
+    /// Adds all items from the provided List to the ObservableList.
+    /// </summary>   
+    void AddRange(IList<T> item);
 
     /// <summary>
     /// Determines whether the ObservableList contains a specific item.
@@ -99,6 +105,12 @@ public class ObservableList<T> : IList<T>, IObservableList<T>
     public void Add(T item)
     {
         list.Add(item);
+        Invoke();
+    }
+
+    public void AddRange(IList<T> item)
+    {
+        list.AddRange(item);
         Invoke();
     }
 

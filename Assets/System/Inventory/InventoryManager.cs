@@ -4,7 +4,7 @@ namespace System.Inventory
     public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private InventoryView view;
-        [SerializeField] private Inventory items;
+        [SerializeField] private InventoryDataSource items;
 
         InventoryController controller;
 

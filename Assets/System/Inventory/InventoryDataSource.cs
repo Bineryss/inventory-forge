@@ -9,12 +9,18 @@ namespace System.Inventory
         ObservableList<ItemInstance> DataSource { get; }
     }
 
-    public class Inventory : MonoBehaviour, IInventoryDataSource
+    public class InventoryDataSource : MonoBehaviour, IInventoryDataSource
     {
         private static ObservableList<ItemInstance> dataSource;
 
         [SerializeField] private List<ItemInstance> inventory = new();
-        public ObservableList<ItemInstance> DataSource => dataSource == null ? dataSource = new ObservableList<ItemInstance>(inventory) : dataSource;
+        public ObservableList<ItemInstance> DataSource => dataSource ??= new ObservableList<ItemInstance>(inventory);
+
+        [ContextMenu("Refresh Data")]
+        void RefreshDataSource()
+        {
+            dataSource.Invoke();
+        }
     }
 
 

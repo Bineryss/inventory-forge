@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TestScirpt : MonoBehaviour
 {
-    [SerializeField] private Inventory inventory;
+    [SerializeField] private InventoryDataSource inventory;
 
     void Awake()
     {
