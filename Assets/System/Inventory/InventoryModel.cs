@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace System.Inventory
 {
@@ -23,19 +22,6 @@ namespace System.Inventory
         public void Add(ItemInstance data)
         {
             items.Add(data);
-        }
-
-        public void SelectItem(string id)
-        {
-            ItemInstance data = items
-            .ToList()
-            .Where(item =>
-            {
-                return id.Equals(item.Id);
-            })
-            .FirstOrDefault();
-            selectedItem = data;
-            items.Invoke(); //TODO find proper event mechanism for this here
         }
 
         public void ChangeQuantity(ItemInstance data, int quantityDelta)

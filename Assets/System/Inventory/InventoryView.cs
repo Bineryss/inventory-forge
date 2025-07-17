@@ -35,6 +35,7 @@ namespace System.Inventory
             list.Add(listView);
 
             detailView = new();
+            detailView.style.display = DisplayStyle.None;
             detail.Add(detailView);
 
             yield return null;
@@ -52,6 +53,10 @@ namespace System.Inventory
 
         public void UpdateDetailData(ItemDisplayDetailData data)
         {
+            if (detailView.style.display == DisplayStyle.None)
+            {
+                detailView.style.display = DisplayStyle.Flex;
+            }
             detailView.Data = data;
         }
 

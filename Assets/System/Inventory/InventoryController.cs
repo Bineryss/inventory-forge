@@ -32,7 +32,19 @@ namespace System.Inventory
 
         private void HandleItemClick(string id)
         {
-            model.SelectItem(id);
+            ItemInstance selected = model.items.FirstOrDefault(item => id.Equals(item.Id));
+            ItemDisplayDetailData displayData = new();
+
+            if (selected != null)
+            {
+                displayData.Id = selected.Id;
+                displayData.Icon = selected.detail.Icon;
+                displayData.BgColor = selected.detail.Rarity.color;
+                displayData.Name = selected.detail.Name;
+                displayData.Description = selected.detail.Description;
+            }
+
+            view.UpdateDetailData(displayData);
         }
 
         private void HandleModelChanged(IList<ItemInstance> data)
@@ -50,23 +62,6 @@ namespace System.Inventory
                 BgColor = item.detail.Rarity.color,
                 Order = item.detail.Rarity.score
             }).ToList());
-
-            var selected = model.selectedItem;
-            if (selected == null)
-            {
-                view.UpdateDetailData(new ItemDisplayDetailData());
-            }
-            else
-            {
-                view.UpdateDetailData(new ItemDisplayDetailData()
-                {
-                    Id = selected.Id,
-                    Icon = selected.detail.Icon,
-                    BgColor = selected.detail.Rarity.color,
-                    Name = selected.detail.Name,
-                    Description = selected.detail.Description
-                });
-            }
         }
 
         #region builder
