@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI
+namespace UIElements
 {
     public class TagElement : VisualElement
     {

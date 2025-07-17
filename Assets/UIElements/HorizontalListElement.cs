@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Pool;
 using UnityEngine.UIElements;
 
-namespace UI
+namespace UIElements
 {
     public class HorizontalListElement<Element, DataType> : VisualElement where Element : VisualElement
     {
