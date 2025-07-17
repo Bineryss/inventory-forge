@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace UI
 {
-    public class HorizontalList<Element, DataType> : VisualElement where Element : VisualElement
+    public class HorizontalListElement<Element, DataType> : VisualElement where Element : VisualElement
     {
         public delegate Element CreateItem();
         public delegate void UpdateItem(Element element, DataType data);
@@ -13,7 +13,7 @@ namespace UI
         private readonly ObjectPool<Element> pool;
         private readonly List<Element> activeElements = new();
         private readonly UpdateItem updateItem;
-        public HorizontalList(CreateItem makeItem, UpdateItem updateItem, int defaultCapacity = 5)
+        public HorizontalListElement(CreateItem makeItem, UpdateItem updateItem, int defaultCapacity = 5)
         {
             this.updateItem = updateItem;
             VisualElement row = new();
@@ -36,6 +36,12 @@ namespace UI
 
         public void Set(IList<DataType> data)
         {
+            if (data == null)
+            {
+                activeElements.ForEach(element => pool.Release(element));
+                return;
+            }
+
             int minLength = Math.Min(activeElements.Count, data.Count);
 
             for (int i = 0; i < minLength; i++)
@@ -56,5 +62,9 @@ namespace UI
             }
         }
 
+        public static implicit operator HorizontalListElement<Element, DataType>(HorizontalListElement<VisualElement, object> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace System.Inventory
                 makeItem = MakeItem,
                 bindItem = (element, index) =>
                     {
-                        if (element is not HorizontalList<ItemDisplay, ItemDisplayData> itemEl) return;
+                        if (element is not HorizontalListElement<ItemDisplay, ItemDisplayData> itemEl) return;
 
                         itemEl.Set(internalDataSource[index]);
                     },
@@ -50,7 +50,8 @@ namespace System.Inventory
 
         private VisualElement MakeItem()
         {
-            HorizontalList<ItemDisplay, ItemDisplayData> element = new(() =>
+            HorizontalListElement<ItemDisplay, ItemDisplayData> element = new(
+            () =>
             {
                 ItemDisplay element = new();
                 element.OnClick += (value) => OnElementClick.Invoke(value);

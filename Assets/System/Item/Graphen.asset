@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06a3bf56a12a314789c0ea2ef939293, type: 3}
   m_Name: Graphen
   m_EditorClassIdentifier: 
-  icon: 
-  rarity: {fileID: 0}
+  id: 368ae3b4-af5e-4dfe-81c4-ed7c364b6b59
+  Icon: G
+  Description: 
+  Rarity: {fileID: 11400000, guid: 92c444cfc12ab0a48bbe974003e2aa7c, type: 2}

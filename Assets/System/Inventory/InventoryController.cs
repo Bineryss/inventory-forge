@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace System.Inventory
@@ -33,7 +34,7 @@ namespace System.Inventory
         private void HandleItemClick(string id)
         {
             Debug.Log($"handle click for {id}");
-            model.ChangeQuantity(id, -1);
+            model.SelectItem(id);
         }
 
         private void HandleModelChanged(IList<ItemInstance> data)
@@ -47,9 +48,26 @@ namespace System.Inventory
             {
                 Id = item.Id,
                 Quantity = item.quantity,
-                Icon = item.detail.icon,
-                BgColor = item.detail.rarity.color,
+                Icon = item.detail.Icon,
+                BgColor = item.detail.Rarity.color,
             }).ToList());
+
+            var selected = model.selectedItem;
+            if (selected == null)
+            {
+                view.UpdateDetailData(new ItemDisplayDetailData());
+            }
+            else
+            {
+                view.UpdateDetailData(new ItemDisplayDetailData()
+                {
+                    Id = selected.Id,
+                    Icon = selected.detail.Icon,
+                    BgColor = selected.detail.Rarity.color,
+                    Name = selected.detail.Name,
+                    Description = selected.detail.Description
+                });
+            }
         }
 
         #region builder

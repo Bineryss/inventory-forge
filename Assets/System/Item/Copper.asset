@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06a3bf56a12a314789c0ea2ef939293, type: 3}
   m_Name: Copper
   m_EditorClassIdentifier: 
-  icon: 
-  rarity: {fileID: 0}
+  id: 635441c8-0763-470a-bd88-e2e2381e578c
+  Icon: CU
+  Description: 
+  Rarity: {fileID: 11400000, guid: 2e0da8d3d7e62b545951d036257c4e8c, type: 2}

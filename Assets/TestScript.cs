@@ -18,7 +18,7 @@ public class TestScirpt : MonoBehaviour
         Debug.Log("Value Changed in Inventory");
         foreach (var item in data)
         {
-            Debug.Log($"🚀 {item.detail.icon}-{item.quantity}");
+            Debug.Log($"🚀 {item.detail.Icon}-{item.quantity}");
         }
     }
 }

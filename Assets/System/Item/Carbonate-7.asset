@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06a3bf56a12a314789c0ea2ef939293, type: 3}
   m_Name: Carbonate-7
   m_EditorClassIdentifier: 
-  icon: 
-  rarity: {fileID: 0}
+  id: cdf58b46-cbeb-4f1c-b182-a1ee6b4ccbe9
+  Icon: C7
+  Description: 
+  Rarity: {fileID: 11400000, guid: 2e0da8d3d7e62b545951d036257c4e8c, type: 2}

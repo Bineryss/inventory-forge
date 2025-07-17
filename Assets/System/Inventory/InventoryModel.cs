@@ -7,6 +7,7 @@ namespace System.Inventory
     public class InventoryModel
     {
         public readonly ObservableList<ItemInstance> items = new();
+        public ItemInstance selectedItem;
         public event Action<IList<ItemInstance>> OnModelChanged
         {
             add => items.ValueChanged += value;
@@ -22,6 +23,19 @@ namespace System.Inventory
         public void Add(ItemInstance data)
         {
             items.Add(data);
+        }
+
+        public void SelectItem(string id)
+        {
+            ItemInstance data = items
+            .ToList()
+            .Where(item =>
+            {
+                return id.Equals(item.Id);
+            })
+            .FirstOrDefault();
+            selectedItem = data;
+            items.Invoke(); //TODO find proper event mechanism for this here
         }
 
         public void ChangeQuantity(ItemInstance data, int quantityDelta)
