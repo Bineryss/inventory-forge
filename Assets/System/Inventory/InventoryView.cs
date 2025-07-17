@@ -7,27 +7,24 @@ using UnityEngine.UIElements;
 namespace System.Inventory
 {
 
-    public class InventoryView : StorageView
+    public class InventoryView : MonoBehaviour
     {
-        private static VisualTreeAsset asset;
+        [SerializeField] private VisualTreeAsset asset;
+        [SerializeField] private StyleSheet styleSheet;
         public event Action<string> OnItemClick = delegate { };
 
+        private VisualElement root;
         private InventoryListView listView;
         private ItemDetailElement detailView;
-        public override IEnumerator InitializeView()
+        public IEnumerator InitializeView()
         {
-            Root.Clear();
-            Root.styleSheets.Add(styleSheet);
+            root ??= new();
+            root.Clear();
+            root.styleSheets.Add(styleSheet);
+            asset.CloneTree(root);
 
-            if (asset == null)
-            {
-                asset = UnityEngine.Resources.Load<VisualTreeAsset>("inventory-view");
-            }
-
-            asset.CloneTree(Root);
-
-            VisualElement list = Root.Q<VisualElement>("list");
-            VisualElement detail = Root.Q<VisualElement>("detail");
+            VisualElement list = root.Q<VisualElement>("list");
+            VisualElement detail = root.Q<VisualElement>("detail");
 
             listView = new();
             listView.OnElementClick += (value) => OnItemClick.Invoke(value);
@@ -40,7 +37,11 @@ namespace System.Inventory
 
             yield return null;
         }
-
+        public void SetRoot(VisualElement root)
+        {
+            this.root ??= new();
+            root.Add(this.root);
+        }
 
         public void UpdateData(List<ItemDisplayData> data)
         {

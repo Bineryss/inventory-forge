@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace System.Inventory
@@ -33,7 +32,6 @@ namespace System.Inventory
 
         private void HandleItemClick(string id)
         {
-            Debug.Log($"handle click for {id}");
             model.SelectItem(id);
         }
 

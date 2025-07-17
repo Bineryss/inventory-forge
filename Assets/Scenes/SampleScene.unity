@@ -459,6 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 1393337497}
   items: {fileID: 1160236594}
+  root: {fileID: 1393337495}
 --- !u!4 &1160236593
 Transform:
   m_ObjectHideFlags: 0
@@ -572,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec19ae3824b1f514a9ada0006496cd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  document: {fileID: 1393337495}
+  asset: {fileID: 9197481963319205126, guid: 20368d4abb574d740a0901fc717ac683, type: 3}
   styleSheet: {fileID: 7433441132597879392, guid: a6d521b3fadde50499609e7c32dc6385, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
