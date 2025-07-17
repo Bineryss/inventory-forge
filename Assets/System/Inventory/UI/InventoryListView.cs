@@ -5,6 +5,12 @@ using UnityEngine.UIElements;
 
 namespace System.Inventory
 {
+    public enum Order
+    {
+        NONE,
+        ASC,
+        DESC
+    }
     public class InventoryListView : VisualElement
     {
         public event Action<string> OnElementClick = delegate { };
@@ -22,7 +28,7 @@ namespace System.Inventory
 
                 while (row < value.Count)
                 {
-                    listList.Add(value.Skip(row).Take(Cols).ToList());
+                    listList.Add(value.OrderByDescending(el => el.Order).Skip(row).Take(Cols).ToList());
                     row += Cols;
                 }
 

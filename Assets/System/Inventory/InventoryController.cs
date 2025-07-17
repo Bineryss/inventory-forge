@@ -7,8 +7,8 @@ namespace System.Inventory
 {
     public class InventoryController
     {
-        readonly InventoryModel model;
-        readonly InventoryView view;
+        private readonly InventoryModel model;
+        private readonly InventoryView view;
 
         private InventoryController(InventoryView view, InventoryModel model)
         {

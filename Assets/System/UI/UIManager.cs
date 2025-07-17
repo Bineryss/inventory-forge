@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Crafting;
 using System.Inventory;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,6 +16,7 @@ namespace System.UI
         [Header("Views")]
         [SerializeField] private InventoryView inventoryView;
         [SerializeField] private MainMenu menuView;
+        [SerializeField] private CraftingView craftingView;
 
 
         private Dictionary<UIState, IView> views;
@@ -23,13 +25,16 @@ namespace System.UI
 
         void Start()
         {
+            CraftingController cC = new(craftingView);
+
             StartCoroutine(menuView.InitializeView(TransitionTo));
             VisualElement rootContainer = document.rootVisualElement.Q("container");
 
             views = new()
             {
-                {UIState.INVENTORY, inventoryView},
                 {UIState.MENU, menuView},
+                {UIState.INVENTORY, inventoryView},
+                {UIState.CRAFTING, craftingView},
             };
 
             foreach (IView view in views.Values)
@@ -39,7 +44,7 @@ namespace System.UI
             }
 
             BackButton.clicked += () => TransitionTo(UIState.MENU);
-            TransitionTo(UIState.INVENTORY);
+            TransitionTo(UIState.CRAFTING);
         }
 
         public void TransitionTo(UIState newState)

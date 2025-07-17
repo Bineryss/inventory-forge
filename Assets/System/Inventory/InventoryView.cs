@@ -48,7 +48,7 @@ namespace System.Inventory
 
         public void UpdateData(List<ItemDisplayData> data)
         {
-            listView.Data = data.OrderByDescending(el => el.Order).ToList();
+            listView.Data = data;
         }
 
         public void UpdateDetailData(ItemDisplayDetailData data)
