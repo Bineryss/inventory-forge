@@ -48,6 +48,7 @@ namespace System.Inventory
                 Quantity = item.quantity,
                 Icon = item.detail.Icon,
                 BgColor = item.detail.Rarity.color,
+                Order = item.detail.Rarity.score
             }).ToList());
 
             var selected = model.selectedItem;

@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-self: center;">
+        <ui:Button text="Inventory" name="inventory" />
+        <ui:Button text="Crafting Menu" name="crafting" />
+    </ui:VisualElement>
+</ui:UXML>

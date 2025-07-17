@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1;">
         <ui:VisualElement style="flex-grow: initial;">
-            <ui:Button text="Header Button" />
+            <ui:Button text="Header Button" name="to-menu" />
         </ui:VisualElement>
         <ui:VisualElement name="container" style="flex-grow: 1;" />
         <ui:VisualElement style="flex-grow: initial;">

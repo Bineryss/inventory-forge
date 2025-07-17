@@ -12,21 +12,24 @@ namespace System.UI
         [SerializeField] private UIDocument document;
         [SerializeField] private StyleSheet styleSheet;
 
-        [Header("Inventory")]
+        [Header("Views")]
         [SerializeField] private InventoryView inventoryView;
+        [SerializeField] private MainMenu menuView;
 
 
         private Dictionary<UIState, IView> views;
-        private UIState current = UIState.MENU;
+        private UIState current;
         private Button BackButton => document.rootVisualElement.Q<Button>("to-menu");
 
         void Start()
         {
+            StartCoroutine(menuView.InitializeView(TransitionTo));
             VisualElement rootContainer = document.rootVisualElement.Q("container");
 
             views = new()
             {
                 {UIState.INVENTORY, inventoryView},
+                {UIState.MENU, menuView},
             };
 
             foreach (IView view in views.Values)
@@ -36,7 +39,6 @@ namespace System.UI
             }
 
             BackButton.clicked += () => TransitionTo(UIState.MENU);
-
             TransitionTo(UIState.INVENTORY);
         }
 
@@ -44,10 +46,14 @@ namespace System.UI
         {
             if (current == newState) return;
 
-            views.TryGetValue(current, out IView currentView);
-            currentView?.Hide();
-            views.TryGetValue(newState, out IView nextView);
-            nextView?.Show();
+            if (!views.ContainsKey(newState))
+            {
+                Debug.Log("This view dosn't exist!");
+                return;
+            }
+
+            views[current].Hide();
+            views[newState].Show();
             current = newState;
         }
 

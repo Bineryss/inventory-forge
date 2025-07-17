@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.UI;
 using UI;
 using UnityEngine;
@@ -46,7 +47,7 @@ namespace System.Inventory
 
         public void UpdateData(List<ItemDisplayData> data)
         {
-            listView.Data = data;
+            listView.Data = data.OrderByDescending(el => el.Order).ToList();
         }
 
         public void UpdateDetailData(ItemDisplayDetailData data)
@@ -71,6 +72,7 @@ namespace System.Inventory
         public string Icon;
         public Color BgColor;
         public int Quantity;
+        public int Order;
     }
 
     public class ItemDisplayDetailData
