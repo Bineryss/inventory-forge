@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.UI;
 using UI;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,7 +8,7 @@ using UnityEngine.UIElements;
 namespace System.Inventory
 {
 
-    public class InventoryView : MonoBehaviour
+    public class InventoryView : MonoBehaviour, IView
     {
         [SerializeField] private VisualTreeAsset asset;
         [SerializeField] private StyleSheet styleSheet;
@@ -37,7 +38,7 @@ namespace System.Inventory
 
             yield return null;
         }
-        public void SetRoot(VisualElement root)
+        public void Mount(VisualElement root)
         {
             this.root ??= new();
             root.Add(this.root);
@@ -51,6 +52,16 @@ namespace System.Inventory
         public void UpdateDetailData(ItemDisplayDetailData data)
         {
             detailView.Data = data;
+        }
+
+        public void Show()
+        {
+            root.style.display = DisplayStyle.Flex;
+        }
+
+        public void Hide()
+        {
+            root.style.display = DisplayStyle.None;
         }
     }
 

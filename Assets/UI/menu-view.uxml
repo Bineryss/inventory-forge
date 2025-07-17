@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: initial;">
+            <ui:Button text="Header Button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="container" style="flex-grow: 1;" />
+        <ui:VisualElement style="flex-grow: initial;">
+            <ui:Label text="Footer" name="Label" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
