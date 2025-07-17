@@ -13,11 +13,12 @@ namespace UIElements
         private readonly ObjectPool<Element> pool;
         private readonly List<Element> activeElements = new();
         private readonly UpdateItem updateItem;
-        public HorizontalListElement(CreateItem makeItem, UpdateItem updateItem, int defaultCapacity = 5)
+        public HorizontalListElement(CreateItem makeItem, UpdateItem updateItem, int defaultCapacity = 5, bool wrap = false)
         {
             this.updateItem = updateItem;
             VisualElement row = new();
             row.style.flexDirection = FlexDirection.Row;
+            row.style.flexWrap = wrap ? Wrap.Wrap : Wrap.NoWrap;
             row.style.marginBottom = 4;
             Add(row);
 
@@ -25,12 +26,14 @@ namespace UIElements
             () =>
             {
                 Element element = makeItem();
-                row.Add(element);
                 return element;
             },
-            item => { item.style.display = DisplayStyle.Flex; activeElements.Add(item); },
-            item => { item.style.display = DisplayStyle.None; activeElements.Remove(item); },
-            item => row.Remove(item), true, defaultCapacity, 20
+            item => { row.Add(item); item.style.display = DisplayStyle.None; activeElements.Add(item); },
+            item => { row.Remove(item); activeElements.Remove(item); },
+            item => row.Remove(item),
+            true,
+            defaultCapacity,
+            20
             );
         }
 
@@ -59,12 +62,8 @@ namespace UIElements
             {
                 var element = pool.Get();
                 updateItem(element, data[i]);
+                element.style.display = DisplayStyle.Flex;
             }
-        }
-
-        public static implicit operator HorizontalListElement<Element, DataType>(HorizontalListElement<VisualElement, object> v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

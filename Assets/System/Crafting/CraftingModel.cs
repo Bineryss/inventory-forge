@@ -47,12 +47,12 @@ namespace System.Crafting
             return data;
         }
 
-        public void Add(ItemInstance data)
+        public void Add(ItemDetail data)
         {
-            inventory.Add(data);
+            inventory.Add(new ItemInstance(data));
         }
 
-        public void SelectItem(string id) // ItemInstance.Id
+        public void SelectItem(string id) // ItemInstance Id
         {
             ItemInstance data = ChangeQuantity(id, -1);
             if (data == null)
@@ -63,22 +63,26 @@ namespace System.Crafting
             selection.Add(data.detail);
         }
 
-        public void DeselectItem(string id) // ItemDetail.Id
+        public void DeselectItem(ItemDetail item)
         {
-            ItemInstance data = ChangeQuantity(id, 1);
-            if (data == null)
+            ItemInstance data = inventory.FirstOrDefault(el => item.Equals(el.detail));
+
+            if (data != null)
             {
-                Debug.Log($"Item with id {id} dosn't exist!");
-                return;
+                ChangeQuantity(data.Id, 1);
             }
-            selection.Remove(data.detail);
+            else
+            {
+                inventory.Add(new ItemInstance(item));
+            }
+            selection.Remove(item);
         }
 
         public void ClearSelection()
         {
             foreach (ItemDetail el in selection)
             {
-                DeselectItem(el.Id);
+                DeselectItem(el);
             }
         }
     }

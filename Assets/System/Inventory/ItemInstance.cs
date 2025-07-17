@@ -6,8 +6,8 @@ namespace System.Inventory
     public class ItemInstance
     {
         private string id;
-        public string Id => id == null || "".Equals(id) ? (id = Guid.NewGuid().ToString()) : id; // necessary because auf unity
-        public int quantity;
+        public string Id => id == null || "".Equals(id) ? (id = Guid.NewGuid().ToString()) : id; // necessary because of unity
+        public int quantity = 1;
         public ItemDetail detail;
 
         public ItemInstance(ItemDetail detail) => this.detail = detail;

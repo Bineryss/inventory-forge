@@ -68,7 +68,7 @@ namespace System.Crafting
                         Icon = data.Icon,
                         BgColor = data.BgColor
                     });
-                }
+                }, 5, true
             );
             SelectedList.Add(selectedList);
 

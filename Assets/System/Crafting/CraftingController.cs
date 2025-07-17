@@ -13,13 +13,16 @@ namespace System.Crafting
     {
         private readonly CraftingModel model;
         private readonly CraftingView view;
+        private readonly ItemDetailDictionary itemDetailDictionary;
 
-        public CraftingController(CraftingView view, CraftingModel model)
+        public CraftingController(CraftingView view, CraftingModel model, ItemDetailDictionary itemDetailDictionary)
         {
             Debug.Assert(view != null, "View is null");
             Debug.Assert(model != null, "Model is null");
+            Debug.Assert(itemDetailDictionary != null, "ItemDetailDict is null");
             this.view = view;
             this.model = model;
+            this.itemDetailDictionary = itemDetailDictionary;
 
             view.StartCoroutine(Initialize());
         }
@@ -32,7 +35,7 @@ namespace System.Crafting
             model.OnInventoryChanged += HandleInventoryChanged;
 
             view.OnItemSelect += (value) => model.SelectItem(value);
-            view.OnItemDeselect += (value) => model.DeselectItem(MapDetailToInstanceId(value));
+            view.OnItemDeselect += HandleItemDeselect;
             view.OnCraftingClick += HandleCraftingClick;
             view.OnClearSelectionClick += HandleCraftingClick;
 
@@ -45,10 +48,17 @@ namespace System.Crafting
             HandleInventoryChanged(model.inventory);
         }
 
-        private string MapDetailToInstanceId(string id)
+        private void HandleItemDeselect(string id)
         {
-            Debug.Log($"id: {id}");
-            return model.inventory.FirstOrDefault(item => id.Equals(item.detail.Id))?.Id ?? "";
+            itemDetailDictionary.DataSource.TryGetValue(id, out ItemDetail item);
+
+            if (item == null)
+            {
+                Debug.Log($"ItemDetail with Id {id} is missing");
+                return;
+            }
+
+            model.DeselectItem(item);
         }
 
         private void HandleSelectionChanged(IList<ItemDetail> data)
