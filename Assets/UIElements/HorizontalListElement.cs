@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UIElements;
 
@@ -7,13 +8,12 @@ namespace UIElements
 {
     public class HorizontalListElement<Element, DataType> : VisualElement where Element : VisualElement
     {
-        public delegate Element CreateItem();
         public delegate void UpdateItem(Element element, DataType data);
 
         private readonly ObjectPool<Element> pool;
         private readonly List<Element> activeElements = new();
         private readonly UpdateItem updateItem;
-        public HorizontalListElement(CreateItem makeItem, UpdateItem updateItem, int defaultCapacity = 5, bool wrap = false)
+        public HorizontalListElement(Func<Element> createItem, UpdateItem updateItem, Action<Element> destroyItem, int defaultCapacity = 5, bool wrap = false)
         {
             this.updateItem = updateItem;
             VisualElement row = new();
@@ -23,17 +23,13 @@ namespace UIElements
             Add(row);
 
             pool = new(
-            () =>
-            {
-                Element element = makeItem();
-                return element;
-            },
+            createItem,
             item => { row.Add(item); item.style.display = DisplayStyle.None; activeElements.Add(item); },
             item => { row.Remove(item); activeElements.Remove(item); },
-            item => row.Remove(item),
+            destroyItem,
             true,
             defaultCapacity,
-            20
+            2
             );
         }
 

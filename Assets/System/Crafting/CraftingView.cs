@@ -40,43 +40,14 @@ namespace System.Crafting
                 root.styleSheets.Add(styleSheet);
             }
             asset.CloneTree(root);
-
-            inventoryList = new();
-            inventoryList.OnElementClick += (value) => OnItemSelect.Invoke(value);
-            inventoryList.style.flexGrow = 1;
-            InventoryList.Add(inventoryList);
-
-            Overlay.style.display = DisplayStyle.None;
-            detailView = new();
-            detailView.style.display = DisplayStyle.None;
-            DetailViewContainer.Add(detailView);
-            OKButton.clicked += () => Overlay.style.display = DisplayStyle.None;
-
-            selectedList = new(
-                () =>
-                {
-                    ItemDisplay element = new();
-                    element.OnClick += (value) => OnItemDeselect.Invoke(value);
-                    element.style.marginRight = 4;
-                    return element;
-                },
-                (element, data) =>
-                {
-                    element.Set(new ItemDisplayData()
-                    {
-                        Id = data.Id,
-                        Icon = data.Icon,
-                        BgColor = data.BgColor
-                    });
-                }, 5, true
-            );
-            SelectedList.Add(selectedList);
+            CreateInventoryList();
+            CreateOverlay();
+            CreateSelectionList();
 
             CraftingButton.clicked += () => OnCraftingClick.Invoke();
 
             yield return null;
         }
-
         public void UpdateInventory(List<ItemDisplayData> data)
         {
             inventoryList.Data = data;
@@ -108,6 +79,50 @@ namespace System.Crafting
         {
             root.style.display = DisplayStyle.Flex;
         }
+
+        private void CreateSelectionList()
+        {
+            void handleOnSelectedListClick(string value) => OnItemDeselect.Invoke(value);
+            selectedList = new(
+                () =>
+                {
+                    ItemDisplay element = new();
+                    element.OnClick += handleOnSelectedListClick;
+                    element.style.marginRight = 4;
+                    return element;
+                },
+                (element, data) =>
+                {
+                    element.Set(new ItemDisplayData()
+                    {
+                        Id = data.Id,
+                        Icon = data.Icon,
+                        BgColor = data.BgColor
+                    });
+                },
+                (element) => element.OnClick -= handleOnSelectedListClick,
+                5, true
+            );
+            SelectedList.Add(selectedList);
+        }
+
+        private void CreateOverlay()
+        {
+            Overlay.style.display = DisplayStyle.None;
+            detailView = new();
+            detailView.style.display = DisplayStyle.None;
+            DetailViewContainer.Add(detailView);
+            OKButton.clicked += () => Overlay.style.display = DisplayStyle.None;
+        }
+
+        private void CreateInventoryList()
+        {
+            inventoryList = new();
+            inventoryList.OnElementClick += (value) => OnItemSelect.Invoke(value);
+            inventoryList.style.flexGrow = 1;
+            InventoryList.Add(inventoryList);
+        }
+
     }
 
     public class SelectedItemDisplayData

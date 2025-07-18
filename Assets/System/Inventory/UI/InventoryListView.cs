@@ -56,18 +56,20 @@ namespace System.Inventory
 
         private VisualElement MakeItem()
         {
+            void handleOnClick(string value) => OnElementClick.Invoke(value);
             HorizontalListElement<ItemDisplay, ItemDisplayData> element = new(
             () =>
             {
                 ItemDisplay element = new();
-                element.OnClick += (value) => OnElementClick.Invoke(value);
+                element.OnClick += handleOnClick;
                 element.style.marginRight = 4;
                 return element;
             },
             (element, data) =>
             {
                 element.Set(data);
-            });
+            },
+            (element) => element.OnClick -= handleOnClick);
             return element;
         }
     }

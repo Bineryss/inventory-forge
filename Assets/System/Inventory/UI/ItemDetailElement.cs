@@ -47,7 +47,8 @@ namespace System.Inventory
             (element, data) =>
             {
                 element.Set(data);
-            }
+            },
+            (element) => { }
             );
 
             EffectListContainer.Add(horizontalList);
