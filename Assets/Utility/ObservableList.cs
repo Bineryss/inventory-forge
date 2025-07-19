@@ -1,7 +1,8 @@
+
 using System;
-using System.Collections.Generic;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Initializes a new instance of the ObservableList class that is empty
@@ -108,9 +109,19 @@ public class ObservableList<T> : IList<T>, IObservableList<T>
         Invoke();
     }
 
-    public void AddRange(IList<T> item)
+    public void AddRange(IList<T> items)
     {
-        list.AddRange(item);
+        if (list is List<T> internalList)
+        {
+            internalList.AddRange(items);
+        }
+        else
+        {
+            foreach (T item in items)
+            {
+                list.Add(item);
+            }
+        }
         Invoke();
     }
 
@@ -136,7 +147,6 @@ public class ObservableList<T> : IList<T>, IObservableList<T>
     }
 
     public IEnumerator<T> GetEnumerator() => list.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
 
     public int IndexOf(T item) => list.IndexOf(item);
 
@@ -151,5 +161,10 @@ public class ObservableList<T> : IList<T>, IObservableList<T>
         // T item = list[index];
         list.RemoveAt(index);
         Invoke();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }

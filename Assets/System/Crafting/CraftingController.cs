@@ -31,7 +31,7 @@ namespace System.Crafting
         {
             yield return view.InitializeView();
 
-            model.OnSelectionChanged += HandleSelectionChanged;
+            model.OnSelectionChanged += (value) => HandleSelectionChanged(value);
             model.OnInventoryChanged += HandleInventoryChanged;
 
             view.OnItemSelect += (value) => model.SelectItem(value);
@@ -61,19 +61,25 @@ namespace System.Crafting
             model.DeselectItem(item);
         }
 
-        private void HandleSelectionChanged(IList<ItemDetail> data)
+        private void HandleSelectionChanged(Dictionary<ItemDetail, int> data)
         {
-            view.UpdateSelectedList(data.Select(item => new SelectedItemDisplayData()
-            {
-                Id = item.Id, //FIXEM ID isnt uniqe wich leads to strange behaviour in the selcted list. Not the clicked element gets removed but the first of its kind
-                Icon = item.Icon,
-                BgColor = item.Rarity.color
-            }).ToList());
+            view.UpdateSelectedList(
+                data
+                .SelectMany(pair => Enumerable.Repeat(pair.Key, pair.Value))
+                .OrderByDescending(item => item.Rarity.score)
+                .Select(item => new SelectedItemDisplayData()
+                {
+                    Id = item.Id,
+                    Icon = item.Icon,
+                    BgColor = item.Rarity.color
+                })
+                .ToList()
+            );
         }
 
         private void HandleInventoryChanged(IList<ItemInstance> data)
         {
-            view.UpdateInventory(data.Select(item => new ItemDisplayData()
+            view.UpdateInventory(data.OrderByDescending(item => item.detail.Rarity.score).Select(item => new ItemDisplayData()
             {
                 Id = item.Id,
                 Icon = item.detail.Icon,

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace System.Item
 {
     [CreateAssetMenu(fileName = "ItemDetail", menuName = "Items/ItemDetail")]
-    public class ItemDetail : ScriptableObject
+    public class ItemDetail : ScriptableObject, IItemDetail
     {
         [SerializeField] private string id = Guid.NewGuid().ToString();
         public string Id => id;
@@ -26,5 +26,11 @@ namespace System.Item
                 UnityEditor.EditorUtility.SetDirty(this);
             }
         }
+    }
+
+    public interface IItemDetail
+    {
+        string Id { get; }
+        string Name { get; }
     }
 }

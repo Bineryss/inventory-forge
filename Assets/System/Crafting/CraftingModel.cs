@@ -8,11 +8,7 @@ namespace System.Crafting
 {
     public class CraftingModel
     {
-        public event Action<IList<ItemDetail>> OnSelectionChanged
-        {
-            add => selection.ValueChanged += value;
-            remove => selection.ValueChanged -= value;
-        }
+        public event Action<Dictionary<ItemDetail, int>> OnSelectionChanged = delegate { };
 
         public event Action<IList<ItemInstance>> OnInventoryChanged
         {
@@ -21,7 +17,7 @@ namespace System.Crafting
         }
 
         public readonly ObservableList<ItemInstance> inventory;
-        public readonly ObservableList<ItemDetail> selection = new();
+        public readonly Dictionary<ItemDetail, int> selection = new();
 
         public CraftingModel(ObservableList<ItemInstance> inventory)
         {
@@ -52,38 +48,64 @@ namespace System.Crafting
             inventory.Add(new ItemInstance(data));
         }
 
-        public void SelectItem(string id) // ItemInstance Id
+        public void SelectItem(string id, int quantity = 1) // ItemInstance Id
         {
-            ItemInstance data = ChangeQuantity(id, -1);
+            ItemInstance data = ChangeQuantity(id, -quantity);
             if (data == null)
             {
                 Debug.Log($"Item with id {id} dosn't exist!");
                 return;
             }
-            selection.Add(data.detail);
+
+
+            if (selection.TryGetValue(data.detail, out int selectedQuantity))
+            {
+                selection[data.detail] = selectedQuantity + quantity;
+                Debug.Log($"{selection[data.detail]}");
+            }
+            else
+            {
+                selection[data.detail] = quantity;
+            }
+            OnSelectionChanged.Invoke(selection);
         }
 
-        public void DeselectItem(ItemDetail item)
+        public void DeselectItem(ItemDetail item, int quantity = 1)
         {
+            if (!selection.TryGetValue(item, out int selectedQuantity))
+            {
+                Debug.Log($"Item with id {item.Id} dosnt exists in selection!");
+                return;
+            }
+            int newQuantity = selectedQuantity - quantity;
+            if (newQuantity < 0)
+            {
+                Debug.Log($"You cant deselct more items than are selected!");
+                return;
+            }
+
+            if (newQuantity == 0)
+            {
+                selection.Remove(item);
+            }
+            else
+            {
+                selection[item] = newQuantity;
+            }
+            OnSelectionChanged.Invoke(selection);
+
+
             ItemInstance data = inventory.FirstOrDefault(el => item.Equals(el.detail));
 
             if (data != null)
             {
-                ChangeQuantity(data.Id, 1);
+                ChangeQuantity(data.Id, quantity);
             }
             else
             {
-                inventory.Add(new ItemInstance(item));
+                inventory.Add(new ItemInstance(item) { quantity = quantity });
             }
-            selection.Remove(item);
         }
 
-        public void ClearSelection()
-        {
-            foreach (ItemDetail el in selection)
-            {
-                DeselectItem(el);
-            }
-        }
     }
 }
