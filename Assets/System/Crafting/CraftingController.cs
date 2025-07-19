@@ -13,9 +13,9 @@ namespace System.Crafting
     {
         private readonly CraftingModel model;
         private readonly CraftingView view;
-        private readonly ItemDetailDictionary itemDetailDictionary;
+        private readonly Dictionary<string, ItemDetail> itemDetailDictionary;
 
-        public CraftingController(CraftingView view, CraftingModel model, ItemDetailDictionary itemDetailDictionary)
+        private CraftingController(CraftingView view, CraftingModel model, Dictionary<string, ItemDetail> itemDetailDictionary)
         {
             Debug.Assert(view != null, "View is null");
             Debug.Assert(model != null, "Model is null");
@@ -50,7 +50,7 @@ namespace System.Crafting
 
         private void HandleItemDeselect(string id)
         {
-            itemDetailDictionary.DataSource.TryGetValue(id, out ItemDetail item);
+            itemDetailDictionary.TryGetValue(id, out ItemDetail item);
 
             if (item == null)
             {
@@ -65,7 +65,7 @@ namespace System.Crafting
         {
             view.UpdateSelectedList(data.Select(item => new SelectedItemDisplayData()
             {
-                Id = item.Id,
+                Id = item.Id, //FIXEM ID isnt uniqe wich leads to strange behaviour in the selcted list. Not the clicked element gets removed but the first of its kind
                 Icon = item.Icon,
                 BgColor = item.Rarity.color
             }).ToList());
@@ -86,5 +86,43 @@ namespace System.Crafting
         {
             Debug.Log("start crafting");
         }
+
+        #region builder
+        public class Builder
+        {
+            private CraftingView view;
+            private ItemDetailDictionary itemDetailDictionary;
+            private IInventoryDataSource inventoryDS;
+
+            public Builder WithView(CraftingView view)
+            {
+                this.view = view;
+                return this;
+            }
+
+            public Builder WithInventoryDataSource(IInventoryDataSource source)
+            {
+                inventoryDS = source;
+                return this;
+            }
+
+            public Builder WithItemDetailService(ItemDetailDictionary dictionary)
+            {
+                itemDetailDictionary = dictionary;
+                return this;
+            }
+
+            public CraftingController Build()
+            {
+                CraftingModel model = inventoryDS != null
+                ? new CraftingModel(inventoryDS.DataSource)
+                : new CraftingModel(new ObservableList<ItemInstance>());
+
+                return new CraftingController(view, model, itemDetailDictionary.DataSource);
+            }
+
+
+        }
+        #endregion
     }
 }

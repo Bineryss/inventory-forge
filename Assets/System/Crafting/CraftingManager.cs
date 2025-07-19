@@ -12,8 +12,11 @@ namespace System.Crafting
 
         void Awake()
         {
-            CraftingModel model = new(inventory.DataSource);
-            new CraftingController(view, model, itemDetailDictionary);
+            new CraftingController.Builder()
+            .WithView(view)
+            .WithInventoryDataSource(inventory)
+            .WithItemDetailService(itemDetailDictionary)
+            .Build();
         }
     }
 }
