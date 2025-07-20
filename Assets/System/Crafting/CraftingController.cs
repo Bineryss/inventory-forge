@@ -66,12 +66,12 @@ namespace System.Crafting
             view.UpdateSelectedList(
                 data
                 .SelectMany(pair => Enumerable.Repeat(pair.Key, pair.Value))
-                .OrderByDescending(item => item.Rarity.score)
+                .OrderByDescending(item => item.Quality.Score)
                 .Select(item => new SelectedItemDisplayData()
                 {
                     Id = item.Id,
                     Icon = item.Icon,
-                    BgColor = item.Rarity.color
+                    BgColor = item.Quality.Color
                 })
                 .ToList()
             );
@@ -79,11 +79,11 @@ namespace System.Crafting
 
         private void HandleInventoryChanged(IList<ItemInstance> data)
         {
-            view.UpdateInventory(data.OrderByDescending(item => item.detail.Rarity.score).Select(item => new ItemDisplayData()
+            view.UpdateInventory(data.OrderByDescending(item => item.detail.Quality.Score).Select(item => new ItemDisplayData()
             {
                 Id = item.Id,
                 Icon = item.detail.Icon,
-                BgColor = item.detail.Rarity.color,
+                BgColor = item.detail.Quality.Color,
                 Quantity = item.quantity
             }).ToList());
         }

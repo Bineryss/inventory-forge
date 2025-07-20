@@ -1,36 +1,35 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Utility;
 
 namespace System.Item
 {
-    [CreateAssetMenu(fileName = "ItemDetail", menuName = "Items/ItemDetail")]
-    public class ItemDetail : ScriptableObject, IItemDetail
+    [CreateAssetMenu(fileName = "ItemDetail", menuName = "Item/ItemDetail")]
+    public class ItemDetail : ScriptableObjectWithId, IItemDetail
     {
-        [SerializeField] private string id = Guid.NewGuid().ToString();
+        [Header("UI")]
+        [SerializeField] private string icon;
+        [TextArea, SerializeField]
+        public string description;
+
+        [Header("Gameplay")]
+        [SerializeField] private Quality rarity;
+
         public string Id => id;
         public string Name => name;
 
-        [Header("UI")]
-        public string Icon;
-        [TextArea]
-        public string Description;
-
-        [Header("Gameplay")]
-        public Rarity Rarity;
-
-
-        private void OnValidate()
-        {
-            if (string.IsNullOrEmpty(Id))
-            {
-                id = Guid.NewGuid().ToString();
-                UnityEditor.EditorUtility.SetDirty(this);
-            }
-        }
+        public string Icon => icon;
+        public string Description => description;
+        public IQuality Quality => rarity;
     }
 
     public interface IItemDetail
     {
         string Id { get; }
         string Name { get; }
+        string Icon { get; }
+        string Description { get; }
+        IQuality Quality { get; }
     }
 }

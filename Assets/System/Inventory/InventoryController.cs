@@ -39,7 +39,7 @@ namespace System.Inventory
             {
                 displayData.Id = selected.Id;
                 displayData.Icon = selected.detail.Icon;
-                displayData.BgColor = selected.detail.Rarity.color;
+                displayData.BgColor = selected.detail.Quality.Color;
                 displayData.Name = selected.detail.Name;
                 displayData.Description = selected.detail.Description;
             }
@@ -59,8 +59,8 @@ namespace System.Inventory
                 Id = item.Id,
                 Quantity = item.quantity,
                 Icon = item.detail.Icon,
-                BgColor = item.detail.Rarity.color,
-                Order = item.detail.Rarity.score
+                BgColor = item.detail.Quality.Color,
+                Order = item.detail.Quality.Score
             }).ToList());
         }
 

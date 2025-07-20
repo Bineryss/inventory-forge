@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e06a3bf56a12a314789c0ea2ef939293, type: 3}
-  m_Name: Copper
+  m_Script: {fileID: 11500000, guid: a35f79f60890dc6429752e61cea0b971, type: 3}
+  m_Name: The Explorer
   m_EditorClassIdentifier: 
-  id: 635441c8-0763-470a-bd88-e2e2381e578c
-  Icon: CU
-  Description: 
-  Rarity: {fileID: 11400000, guid: 2e0da8d3d7e62b545951d036257c4e8c, type: 2}
+  id: a1767719-17c0-4038-bebc-b8764845a0f7
+  icon: THE
+  description: 
+  rarity: {fileID: 11400000, guid: 92c444cfc12ab0a48bbe974003e2aa7c, type: 2}
+  someStats: 69

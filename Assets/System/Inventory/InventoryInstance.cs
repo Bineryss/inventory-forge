@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Item;
 
 namespace System.Inventory
@@ -17,5 +18,11 @@ namespace System.Inventory
             quantity = copy.quantity;
             detail = copy.detail;
         }
+
+        //future
+        private List<ITrait> traits;
+        private ItemInstance equipedWeapon; //only viable if type == SHIP
+    //    private Type type => detail.Type
     }
+
 }

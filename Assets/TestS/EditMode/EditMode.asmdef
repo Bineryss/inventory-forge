@@ -1,11 +1,12 @@
 {
-    "name": "Tests1",
+    "name": "Editor.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Scripts",
-        "TNRD.NSubstitute"
+        "TNRD.NSubstitute",
+        "Utility"
     ],
     "includePlatforms": [
         "Editor"

@@ -9,7 +9,7 @@ namespace System.Crafting
     {
         private readonly Dictionary<string, ICraftingRecipe> recipeLookup;
         private readonly ICraftedItem failedCrafting;
-        private readonly Dictionary<CraftedItemType, Func<IItemDetail, int, int, List<Trait>, ICraftedItem>> itemCreation;
+        private readonly Dictionary<CraftedItemType, Func<IItemDetail, int, int, List<ITrait>, ICraftedItem>> itemCreation;
 
 
         public CraftingService(List<ICraftingRecipe> recipes, ICraftedItem failedCrafting)
@@ -23,7 +23,7 @@ namespace System.Crafting
             };
         }
 
-        private ICraftedItem CreateShip(IItemDetail detail, int requiredMinQuality, int quality, List<Trait> traits)
+        private ICraftedItem CreateShip(IItemDetail detail, int requiredMinQuality, int quality, List<ITrait> traits)
         {
             CraftingOutcomeTier tier = requiredMinQuality <= quality ? CraftingOutcomeTier.STABLE : CraftingOutcomeTier.BRITTEL;
 
@@ -56,7 +56,7 @@ namespace System.Crafting
                 return failedCrafting;
             }
 
-            int evaluatedQuality = materials.Keys.Sum(resource => resource.Quality) / materials.Count();
+            int evaluatedQuality = materials.Keys.Sum(resource => resource.QualityScore) / materials.Count();
 
             Debug.Log(evaluatedQuality);
 
@@ -65,22 +65,22 @@ namespace System.Crafting
         }
 
 
-        private string ToSignature(Dictionary<Characteristic, int> characteristics)
+        private string ToSignature(Dictionary<ICharacteristic, int> characteristics)
         {
-            return string.Join("-", characteristics.OrderBy(entry => entry.Key).Select(entry => $"{entry.Key}:{entry.Value}"));
+            return string.Join("-", characteristics.OrderBy(entry => entry.Key.Id).Select(entry => $"{entry.Key.Id}:{entry.Value}"));
         }
     }
 
     public interface ICraftingResource
     {
-        Characteristic Characteristic { get; }
-        IEnumerable<Trait> Traits { get; }
-        int Quality { get; }
+        ICharacteristic Characteristic { get; }
+        IEnumerable<ITrait> Traits { get; }
+        int QualityScore { get; }
     }
 
     public interface ICraftingRecipe
     {
-        Dictionary<Characteristic, int> RequiredCharacteristics { get; }
+        Dictionary<ICharacteristic, int> RequiredCharacteristics { get; }
         int MinimumQuality { get; }
         IItemDetail OutputData { get; }
         CraftedItemType OutputType { get; }
@@ -89,7 +89,7 @@ namespace System.Crafting
     public interface ICraftedItem
     {
         IItemDetail Data { get; }
-        IEnumerable<Trait> Traits { get; }
+        IEnumerable<ITrait> Traits { get; }
         CraftingOutcomeTier Tier { get; }
         CraftedItemType Type { get; }
     }
@@ -104,21 +104,9 @@ namespace System.Crafting
     {
         public IItemDetail Data { get; set; }
         public CraftingOutcomeTier Tier { get; set; }
-        public IEnumerable<Trait> Traits { get; set; }
+        public IEnumerable<ITrait> Traits { get; set; }
 
         public CraftedItemType Type => CraftedItemType.SHIP;
-    }
-
-    public enum Trait
-    {
-        CONDUCTING,
-        FLEXIBLE
-    }
-
-    public enum Characteristic
-    {
-        METALL,
-        COMPOSIT
     }
 
     public enum CraftingOutcomeTier

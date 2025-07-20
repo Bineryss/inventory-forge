@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e06a3bf56a12a314789c0ea2ef939293, type: 3}
-  m_Name: Graphen
+  m_Script: {fileID: 11500000, guid: 11853c57cbeb91044bafd0c55990f4c3, type: 3}
+  m_Name: T0
   m_EditorClassIdentifier: 
-  id: 368ae3b4-af5e-4dfe-81c4-ed7c364b6b59
-  Icon: G
-  Description: 
-  Rarity: {fileID: 11400000, guid: 92c444cfc12ab0a48bbe974003e2aa7c, type: 2}
+  label: Common
+  score: 0
+  color: {r: 0.3886792, g: 0.3886792, b: 0.3886792, a: 1}
