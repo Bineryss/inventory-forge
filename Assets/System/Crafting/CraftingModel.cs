@@ -8,7 +8,7 @@ namespace System.Crafting
 {
     public class CraftingModel
     {
-        public event Action<Dictionary<ItemDetail, int>> OnSelectionChanged = delegate { };
+        public event Action<Dictionary<IItemDetail, int>> OnSelectionChanged = delegate { };
 
         public event Action<IList<ItemInstance>> OnInventoryChanged
         {
@@ -17,7 +17,7 @@ namespace System.Crafting
         }
 
         public readonly ObservableList<ItemInstance> inventory;
-        public readonly Dictionary<ItemDetail, int> selection = new();
+        public readonly Dictionary<IItemDetail, int> selection = new();
 
         public CraftingModel(ObservableList<ItemInstance> inventory)
         {
@@ -43,7 +43,7 @@ namespace System.Crafting
             return data;
         }
 
-        public void Add(ItemDetail data)
+        public void Add(IItemDetail data)
         {
             inventory.Add(new ItemInstance(data));
         }
@@ -58,19 +58,18 @@ namespace System.Crafting
             }
 
 
-            if (selection.TryGetValue(data.detail, out int selectedQuantity))
+            if (selection.TryGetValue(data.Detail, out int selectedQuantity))
             {
-                selection[data.detail] = selectedQuantity + quantity;
-                Debug.Log($"{selection[data.detail]}");
+                selection[data.Detail] = selectedQuantity + quantity;
             }
             else
             {
-                selection[data.detail] = quantity;
+                selection[data.Detail] = quantity;
             }
             OnSelectionChanged.Invoke(selection);
         }
 
-        public void DeselectItem(ItemDetail item, int quantity = 1)
+        public void DeselectItem(IItemDetail item, int quantity = 1)
         {
             if (!selection.TryGetValue(item, out int selectedQuantity))
             {
@@ -95,7 +94,7 @@ namespace System.Crafting
             OnSelectionChanged.Invoke(selection);
 
 
-            ItemInstance data = inventory.FirstOrDefault(el => item.Equals(el.detail));
+            ItemInstance data = inventory.FirstOrDefault(el => item.Equals(el.Detail));
 
             if (data != null)
             {

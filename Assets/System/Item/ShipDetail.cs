@@ -6,4 +6,5 @@ public class ShipDetail : ItemDetail
 {
     [Header("Stats")]
     [SerializeField] private int someStats;
+    public string shipData;
 }

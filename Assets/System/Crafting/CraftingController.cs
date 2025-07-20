@@ -13,9 +13,9 @@ namespace System.Crafting
     {
         private readonly CraftingModel model;
         private readonly CraftingView view;
-        private readonly Dictionary<string, ItemDetail> itemDetailDictionary;
+        private readonly IItemDetailService itemDetailDictionary;
 
-        private CraftingController(CraftingView view, CraftingModel model, Dictionary<string, ItemDetail> itemDetailDictionary)
+        private CraftingController(CraftingView view, CraftingModel model, IItemDetailService itemDetailDictionary)
         {
             Debug.Assert(view != null, "View is null");
             Debug.Assert(model != null, "Model is null");
@@ -50,7 +50,7 @@ namespace System.Crafting
 
         private void HandleItemDeselect(string id)
         {
-            itemDetailDictionary.TryGetValue(id, out ItemDetail item);
+            itemDetailDictionary.TryGetValue(id, out IItemDetail item);
 
             if (item == null)
             {
@@ -61,7 +61,7 @@ namespace System.Crafting
             model.DeselectItem(item);
         }
 
-        private void HandleSelectionChanged(Dictionary<ItemDetail, int> data)
+        private void HandleSelectionChanged(Dictionary<IItemDetail, int> data)
         {
             view.UpdateSelectedList(
                 data
@@ -79,11 +79,11 @@ namespace System.Crafting
 
         private void HandleInventoryChanged(IList<ItemInstance> data)
         {
-            view.UpdateInventory(data.OrderByDescending(item => item.detail.Quality.Score).Select(item => new ItemDisplayData()
+            view.UpdateInventory(data.OrderByDescending(item => item.Detail.Quality.Score).Select(item => new ItemDisplayData()
             {
                 Id = item.Id,
-                Icon = item.detail.Icon,
-                BgColor = item.detail.Quality.Color,
+                Icon = item.Detail.Icon,
+                BgColor = item.Detail.Quality.Color,
                 Quantity = item.quantity
             }).ToList());
         }
@@ -124,7 +124,7 @@ namespace System.Crafting
                 ? new CraftingModel(inventoryDS.DataSource)
                 : new CraftingModel(new ObservableList<ItemInstance>());
 
-                return new CraftingController(view, model, itemDetailDictionary.DataSource);
+                return new CraftingController(view, model, itemDetailDictionary);
             }
 
 

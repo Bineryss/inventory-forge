@@ -477,11 +477,11 @@ MonoBehaviour:
   - quantity: 25
     detail: {fileID: 11400000, guid: 29b32cb11200d0e42a9bfab4fc4bfe6d, type: 2}
   - quantity: 25
-    detail: {fileID: 11400000, guid: fcc1b23c939a98b469eccbafe3c1d5d5, type: 2}
+    detail: {fileID: 11400000, guid: deef654d24e3b1542b37d07dbc890a7f, type: 2}
   - quantity: 5
     detail: {fileID: 11400000, guid: 5cf317c231c43ae4da62adf96e759328, type: 2}
   - quantity: 36
-    detail: {fileID: 11400000, guid: deef654d24e3b1542b37d07dbc890a7f, type: 2}
+    detail: {fileID: 11400000, guid: fcc1b23c939a98b469eccbafe3c1d5d5, type: 2}
 --- !u!114 &1160236595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,12 +494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3900d7cda0807d646b944959c75dfaea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDetails:
-  - {fileID: 11400000, guid: ffdc76bf1a2c8df4ca5d438a119b217a, type: 2}
-  - {fileID: 11400000, guid: 29b32cb11200d0e42a9bfab4fc4bfe6d, type: 2}
-  - {fileID: 11400000, guid: 5cf317c231c43ae4da62adf96e759328, type: 2}
-  - {fileID: 11400000, guid: fcc1b23c939a98b469eccbafe3c1d5d5, type: 2}
-  - {fileID: 11400000, guid: deef654d24e3b1542b37d07dbc890a7f, type: 2}
+  itemDetailsRef:
+    m_LabelString: item-detail
+  loadedItemsDisplay: []
 --- !u!1 &1393337493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1183975178226287089, guid: f9c50d221fb20b948802bafbf86070fd, type: 3}

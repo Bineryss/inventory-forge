@@ -38,10 +38,10 @@ namespace System.Inventory
             if (selected != null)
             {
                 displayData.Id = selected.Id;
-                displayData.Icon = selected.detail.Icon;
-                displayData.BgColor = selected.detail.Quality.Color;
-                displayData.Name = selected.detail.Name;
-                displayData.Description = selected.detail.Description;
+                displayData.Icon = selected.Detail.Icon;
+                displayData.BgColor = selected.Detail.Quality.Color;
+                displayData.Name = selected.Detail.Name;
+                displayData.Description = selected.Detail.Description;
             }
 
             view.UpdateDetailData(displayData);
@@ -58,9 +58,9 @@ namespace System.Inventory
             {
                 Id = item.Id,
                 Quantity = item.quantity,
-                Icon = item.detail.Icon,
-                BgColor = item.detail.Quality.Color,
-                Order = item.detail.Quality.Score
+                Icon = item.Detail.Icon,
+                BgColor = item.Detail.Quality.Color,
+                Order = item.Detail.Quality.Score
             }).ToList());
         }
 
