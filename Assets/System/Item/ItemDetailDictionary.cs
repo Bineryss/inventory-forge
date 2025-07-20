@@ -62,7 +62,7 @@ namespace System.Item
             }
             else
             {
-                detail = null;
+                detail = default;
                 return false;
             }
         }
@@ -71,7 +71,7 @@ namespace System.Item
         {
             TryGetValue(key, out IItemDetail detailInterface);
 
-            if (detailInterface is T t)
+            if (detailInterface != null && detailInterface is T t)
             {
                 detail = t;
                 return true;
