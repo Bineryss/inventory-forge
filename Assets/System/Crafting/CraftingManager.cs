@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using System.Inventory;
 using System.Item;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Utility;
 
 namespace System.Crafting
@@ -14,22 +12,27 @@ namespace System.Crafting
     {
         [SerializeField] private CraftingView view;
         [SerializeField] private InventoryDataSource inventory;
-        [SerializeField] private ItemDetailDictionary itemDetailDictionary;
-        [SerializeField] private AssetLabelReference recipeRef;
         [OdinSerialize] private ICraftedItem failedItem;
-        [OdinSerialize, ReadOnly] private IDataRegistry<ICraftingRecipe> recipeRegistry;
 
-        void Awake()
+        private bool itemDetailRegInit;
+        private bool recipeRegInit;
+
+        public void Initialize(IDataRegistry<IItemDetail> itemDetailRegistry, IDataRegistry<ICraftingRecipe> recipeRegistry)
         {
-            recipeRegistry = new DataRegistry<ICraftingRecipe>();
-            recipeRegistry.Initialize(recipeRef, (value) => value.GetHashCode().ToString());
+            recipeRegistry.OnInitialized += () => { recipeRegInit = true; HandleInit(itemDetailRegistry, recipeRegistry); };
+            itemDetailRegistry.OnInitialized += () => { itemDetailRegInit = true; HandleInit(itemDetailRegistry, recipeRegistry); };
+        }
 
-            recipeRegistry.OnInitialized += () => new CraftingController.Builder()
-            .WithView(view)
-            .WithInventoryDataSource(inventory)
-            .WithItemDetailService(itemDetailDictionary)
-            .WithCraftingService(new CraftingService(recipeRegistry.Registry.Values.ToList(), failedItem))
-            .Build();
+        private void HandleInit(IDataRegistry<IItemDetail> itemDetailRegistry, IDataRegistry<ICraftingRecipe> recipeRegistry)
+        {
+            if (!(itemDetailRegInit && recipeRegInit)) return;
+
+            new CraftingController.Builder()
+                        .WithView(view)
+                        .WithInventoryDataSource(inventory)
+                        .WithItemDetailService(itemDetailRegistry)
+                        .WithCraftingService(new CraftingService(recipeRegistry.Registry.Values.ToList(), failedItem))
+                        .Build();
         }
     }
 }

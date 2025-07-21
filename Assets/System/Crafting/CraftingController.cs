@@ -14,10 +14,10 @@ namespace System.Crafting
     {
         private readonly CraftingModel model;
         private readonly CraftingView view;
-        private readonly IItemDetailService itemDetailDictionary;
+        private readonly IDataRegistry<IItemDetail> itemDetailDictionary;
         private readonly CraftingService craftingService;
 
-        private CraftingController(CraftingView view, CraftingModel model, IItemDetailService itemDetailDictionary, CraftingService craftingService)
+        private CraftingController(CraftingView view, CraftingModel model, IDataRegistry<IItemDetail> itemDetailDictionary, CraftingService craftingService)
         {
             Debug.Assert(view != null, "View is null");
             Debug.Assert(model != null, "Model is null");
@@ -83,7 +83,7 @@ namespace System.Crafting
 
         private void HandleInventoryChanged(IList<ItemInstance> data)
         {
-            view.UpdateInventory(data.OrderByDescending(item => item.Detail.Quality.Score).Select(item => new ItemDisplayData()
+            view.UpdateInventory(data.Where(item => item.Detail is ICraftingResource).OrderByDescending(item => item.Detail.Quality.Score).Select(item => new ItemDisplayData()
             {
                 Id = item.Id,
                 Icon = item.Detail.Icon,
@@ -99,7 +99,6 @@ namespace System.Crafting
             if (result == null) return;
 
             ItemInstance instance = new(result.Data);
-
             model.Add(instance);
         }
 
@@ -107,7 +106,7 @@ namespace System.Crafting
         public class Builder
         {
             private CraftingView view;
-            private ItemDetailDictionary itemDetailDictionary;
+            private IDataRegistry<IItemDetail> itemDetailDictionary;
             private IInventoryDataSource inventoryDS;
             private CraftingService cs;
 
@@ -123,7 +122,7 @@ namespace System.Crafting
                 return this;
             }
 
-            public Builder WithItemDetailService(ItemDetailDictionary dictionary)
+            public Builder WithItemDetailService(IDataRegistry<IItemDetail> dictionary)
             {
                 itemDetailDictionary = dictionary;
                 return this;

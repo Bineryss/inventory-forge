@@ -58,8 +58,6 @@ namespace System.Crafting
 
             int evaluatedQuality = materials.Keys.Sum(resource => resource.QualityScore) / materials.Count();
 
-            Debug.Log(evaluatedQuality);
-
             ICraftedItem item = createItem(recipe.OutputData, recipe.MinimumQuality, evaluatedQuality, null);
             return item;
         }
