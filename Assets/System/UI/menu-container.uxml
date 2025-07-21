@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:VisualElement style="flex-grow: initial;">
-            <ui:Button text="Header Button" name="to-menu" />
-        </ui:VisualElement>
-        <ui:VisualElement name="container" style="flex-grow: 1;" />
-        <ui:VisualElement style="flex-grow: initial;">
-            <ui:Label text="Footer" name="Label" />
+    <Style src="project://database/Assets/System/UI/Style.uss?fileID=7433441132597879392&amp;guid=a6d521b3fadde50499609e7c32dc6385&amp;type=3#Style" />
+    <ui:VisualElement style="flex-grow: 1; align-items: center; padding-top: 48px; padding-right: 48px; padding-bottom: 48px; padding-left: 48px;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; min-width: 70%; max-width: 70px;">
+            <ui:VisualElement style="flex-grow: initial; flex-direction: row;">
+                <ui:Button text="&lt; Menu" name="to-menu" class="button button-reset action-button" />
+            </ui:VisualElement>
+            <ui:VisualElement name="container" style="flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -1,6 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/System/UI/Style.uss?fileID=7433441132597879392&amp;guid=a6d521b3fadde50499609e7c32dc6385&amp;type=3#Style" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 32px; margin-right: 32px; margin-bottom: 32px; margin-left: 32px;">
-        <ui:VisualElement name="list" style="flex-grow: 1; flex-basis: 70%; margin-right: 32px;" />
+        <ui:VisualElement style="flex-grow: 1; margin-right: 48px; flex-basis: 70%;">
+            <ui:VisualElement style="flex-grow: initial; flex-direction: row; align-items: center;">
+                <ui:VisualElement class="divider" style="flex-grow: 1;" />
+                <ui:Label text="Inventory" class="text-xl text-l" style="font-size: 32px; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/Bignoodletitling.ttf?fileID=12800000&amp;guid=ed9f3e4397236cc4e83ad76cec7083aa&amp;type=3#Bignoodletitling&quot;); margin-right: 16px; margin-left: 16px;" />
+                <ui:VisualElement class="divider" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="list" style="flex-grow: 1;" />
+        </ui:VisualElement>
         <ui:VisualElement name="detail" style="flex-grow: 1; flex-basis: 30%;" />
     </ui:VisualElement>
 </ui:UXML>

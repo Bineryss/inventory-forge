@@ -41,6 +41,7 @@ namespace System.Crafting
             if (materials == null) return failedCrafting;
 
             string materialSignature = ToSignature(materials
+            .Where(entry => entry.Key.Characteristic != null)
             .GroupBy(entry => entry.Key.Characteristic)
             .ToDictionary(group => group.Key, group => group.Sum(entry => entry.Value)));
 

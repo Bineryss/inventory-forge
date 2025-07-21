@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/System/UI/Style.uss?fileID=7433441132597879392&amp;guid=a6d521b3fadde50499609e7c32dc6385&amp;type=3#Style" />
     <ui:VisualElement style="flex-grow: 1; justify-content: center; align-self: center;">
-        <ui:Button text="Inventory" name="inventory" />
-        <ui:Button text="Crafting Menu" name="crafting" />
+        <ui:Label text="Inventory Forge" class="text-xl" style="margin-bottom: 64px;" />
+        <ui:Button text="Inventory" name="inventory" class="action-button button button-reset" />
+        <ui:Button text="Crafting Menu" name="crafting" class="action-button button-reset button" style="margin-top: 24px;" />
     </ui:VisualElement>
 </ui:UXML>

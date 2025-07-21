@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Inventory;
 using System.Item;
 using System.Linq;
+using UIElements;
 using UnityEngine;
 using Utility;
 
@@ -100,6 +101,20 @@ namespace System.Crafting
 
             ItemInstance instance = new(result.Data);
             model.Add(instance);
+            view.UpdateDetailData(new ItemDisplayDetailData()
+            {
+                Icon = instance.Detail.Icon,
+                BgColor = instance.Detail.Quality.Color,
+                Name = instance.Detail.Name,
+                Description = instance.Detail.Description,
+                Effects = new List<TagDisplayData>()
+                {
+                    new TagDisplayData() {
+                        Label = "some label",
+                        Color = Color.royalBlue
+                    }
+                }
+            });
         }
 
         #region builder

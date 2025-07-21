@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Item;
+using System.Linq;
 using UnityEngine;
 
 namespace System.Inventory
@@ -12,6 +14,22 @@ namespace System.Inventory
 
         public IItemDetail Detail => detail;
         [field: SerializeField] public int Quantity { get; set; } = 1;
+        [SerializeField] private List<ITrait> traits = new();
+        public List<ITrait> Traits
+        {
+            get
+            {
+                if (detail is ResourceDetail) return (detail as ResourceDetail).Traits.ToList();
+
+                return traits;
+            }
+            set
+            {
+                if (detail is ResourceDetail) return;
+
+                traits = value;
+            }
+        }
 
         public ItemInstance() { }
         public ItemInstance(IItemDetail detail)
@@ -19,10 +37,6 @@ namespace System.Inventory
             this.detail = detail;
         }
 
-        //future
-        // private List<ITrait> traits;
-        // private ItemInstance equipedWeapon; //only viable if type == SHIP
-        //    private Type type => detail.Type
     }
 
 }

@@ -1,14 +1,24 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
+    <Style src="project://database/Assets/System/UI/Style.uss?fileID=7433441132597879392&amp;guid=a6d521b3fadde50499609e7c32dc6385&amp;type=3#Style" />
+    <ui:VisualElement name="crafting-view" style="flex-grow: 1;">
         <ui:VisualElement style="flex-grow: initial;">
-            <ui:VisualElement name="selected-items" style="flex-grow: 1; min-height: 200px;" />
-            <ui:Button text="Button" name="craft" />
+            <ui:VisualElement style="flex-grow: initial; margin-top: 32px; margin-right: 32px; margin-bottom: 32px; margin-left: 32px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 8px; padding-right: 8px; padding-bottom: 8px; padding-left: 8px;">
+                <ui:VisualElement name="selected-items" style="flex-grow: 1; min-height: 100px;" />
+            </ui:VisualElement>
+            <ui:Button text="Materialize" name="craft" class="button button-reset action-button" style="-unity-font-style: normal;" />
         </ui:VisualElement>
-        <ui:VisualElement name="inventory-list" style="flex-grow: 1;" />
-        <ui:VisualElement name="crafted-item-overlay" style="flex-grow: 1; position: absolute; top: 0; left: 0; bottom: 0; right: 0; max-width: none; align-self: center; align-items: center; justify-content: space-around;">
+        <ui:VisualElement style="flex-grow: 1; margin-top: 48px;">
+            <ui:VisualElement style="flex-grow: initial; flex-direction: row; align-items: center;">
+                <ui:VisualElement class="divider" style="flex-grow: 1;" />
+                <ui:Label text="Inventory" class="text-xl text-l" style="font-size: 32px; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/Bignoodletitling.ttf?fileID=12800000&amp;guid=ed9f3e4397236cc4e83ad76cec7083aa&amp;type=3#Bignoodletitling&quot;); margin-right: 16px; margin-left: 16px;" />
+                <ui:VisualElement class="divider" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-list" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="crafted-item-overlay" enabled="true" style="flex-grow: 1; position: absolute; top: 0; left: 0; bottom: 0; right: 0; max-width: none; align-self: center; align-items: center; justify-content: space-around; display: none;">
             <ui:VisualElement style="flex-grow: 1; max-width: none; align-self: center; justify-content: space-around; background-color: rgba(0, 0, 0, 0.66); padding-top: 8px; padding-right: 8px; padding-bottom: 8px; padding-left: 8px; margin-top: 32px; margin-right: 32px; margin-bottom: 32px; margin-left: 32px;">
-                <ui:VisualElement name="detail-view" style="flex-grow: 1; width: 500px; background-color: rgb(255, 205, 82);" />
-                <ui:Button text="Button" name="ok" />
+                <ui:VisualElement name="detail-view" style="flex-grow: 1; width: 500px;" />
+                <ui:Button text="Close" name="ok" class="action-button button-reset button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

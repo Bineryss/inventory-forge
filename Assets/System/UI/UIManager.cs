@@ -9,6 +9,8 @@ namespace System.UI
 
     public class UIManager : MonoBehaviour
     {
+        [SerializeField] private UIState startingScreen = UIState.MENU;
+
         [Header("Document")]
         [SerializeField] private UIDocument document;
         [SerializeField] private StyleSheet styleSheet;
@@ -27,6 +29,7 @@ namespace System.UI
         {
             StartCoroutine(menuView.InitializeView(TransitionTo));
             VisualElement rootContainer = document.rootVisualElement.Q("container");
+            rootContainer.style.flexGrow = 1;
 
             views = new()
             {
@@ -42,7 +45,7 @@ namespace System.UI
             }
 
             BackButton.clicked += () => TransitionTo(UIState.MENU);
-            TransitionTo(UIState.CRAFTING);
+            TransitionTo(startingScreen);
         }
 
         public void TransitionTo(UIState newState)

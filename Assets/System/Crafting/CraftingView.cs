@@ -34,6 +34,7 @@ namespace System.Crafting
         public IEnumerator InitializeView()
         {
             root ??= new();
+            root.style.flexGrow = 1;
             root.Clear();
             if (styleSheet != null)
             {
@@ -103,6 +104,8 @@ namespace System.Crafting
                 (element) => element.OnClick -= handleOnSelectedListClick,
                 5, true
             );
+            selectedList.Style.marginBottom = 0;
+            selectedList.Style.justifyContent = Justify.Center;
             SelectedList.Add(selectedList);
         }
 
@@ -110,7 +113,6 @@ namespace System.Crafting
         {
             Overlay.style.display = DisplayStyle.None;
             detailView = new();
-            detailView.style.display = DisplayStyle.None;
             DetailViewContainer.Add(detailView);
             OKButton.clicked += () => Overlay.style.display = DisplayStyle.None;
         }

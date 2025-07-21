@@ -14,6 +14,7 @@ namespace System.UI
         public IEnumerator InitializeView(TransitionMethod transitionMethod)
         {
             root ??= new();
+            root.style.flexGrow = 1;
             root.Clear();
 
             asset.CloneTree(root);

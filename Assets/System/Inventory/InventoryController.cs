@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UIElements;
 using UnityEngine;
 
 namespace System.Inventory
@@ -35,6 +36,8 @@ namespace System.Inventory
             ItemInstance selected = model.items.FirstOrDefault(item => id.Equals(item.Id));
             ItemDisplayDetailData displayData = new();
 
+            Debug.Log(selected.Traits);
+
             if (selected != null)
             {
                 displayData.Id = selected.Id;
@@ -42,8 +45,12 @@ namespace System.Inventory
                 displayData.BgColor = selected.Detail.Quality.Color;
                 displayData.Name = selected.Detail.Name;
                 displayData.Description = selected.Detail.Description;
+                displayData.Effects = selected.Traits.Select(trait => new TagDisplayData()
+                {
+                    Color = trait.Color,
+                    Label = trait.Label
+                }).ToList();
             }
-
             view.UpdateDetailData(displayData);
         }
 

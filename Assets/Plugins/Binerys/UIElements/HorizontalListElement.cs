@@ -13,10 +13,13 @@ namespace UIElements
         private readonly ObjectPool<Element> pool;
         private readonly List<Element> activeElements = new();
         private readonly UpdateItem updateItem;
+        private readonly VisualElement row;
+
+        public IStyle Style => row.style;
         public HorizontalListElement(Func<Element> createItem, UpdateItem updateItem, Action<Element> destroyItem, int defaultCapacity = 5, bool wrap = false)
         {
             this.updateItem = updateItem;
-            VisualElement row = new();
+            row = new();
             row.style.flexDirection = FlexDirection.Row;
             row.style.flexWrap = wrap ? Wrap.Wrap : Wrap.NoWrap;
             row.style.marginBottom = 4;

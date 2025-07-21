@@ -3,7 +3,6 @@ using Utility;
 
 namespace System.Item
 {
-    [CreateAssetMenu(fileName = "ItemDetail", menuName = "Item/ItemDetail")]
     public class ItemDetail : ScriptableObjectWithId, IItemDetail
     {
         [Header("UI")]
