@@ -98,10 +98,9 @@ namespace System.Crafting
             model.ConsumeSelection();
             if (result == null) return;
 
-            ItemInstance instance = new ItemInstance(result.Data);
+            ItemInstance instance = new(result.Data);
 
-            Debug.Log($"crafting result: {result.Data.Name}");
-            // model.Add(instance);
+            model.Add(instance);
         }
 
         #region builder
