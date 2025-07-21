@@ -15,15 +15,34 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 6a1f2ffa862dfbf4ba64bc3c7555f3af, type: 2}
+    - {fileID: 11400000, guid: ba0aa108ea1ca5740aba50543a953154, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: traits
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: 912e0933-7204-411b-b658-56c4eaeb438f
-  icon: 
-  description: 
-  rarity: {fileID: 0}
+  icon: CC
+  description: lorem ipsum...
+  rarity: {fileID: 11400000, guid: 4fff1cf17d1ce034e83fd073a33a5ab3, type: 2}
   characteristic: {fileID: 0}
-  traits: []

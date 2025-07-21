@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &47903052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 676098293972690398, guid: f9c50d221fb20b948802bafbf86070fd, type: 3}
+  m_PrefabInstance: {fileID: 2092869268472849768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef3b6288c7aade4f989ac872ba9c701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +388,56 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &601181931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 601181933}
+  - component: {fileID: 601181932}
+  m_Layer: 0
+  m_Name: Entry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &601181932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601181931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c34e9909d1d7a458d2529733b2a7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDetailRef:
+    m_LabelString: item-detail
+  inventoryManager: {fileID: 47903052}
+  recipeRef:
+    m_LabelString: recipes
+  craftingManager: {fileID: 1710719727}
+--- !u!4 &601181933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601181931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +497,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1160236593}
   - component: {fileID: 1160236594}
-  - component: {fileID: 1160236595}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -471,32 +531,192 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61c78a152d638540b44d5e14acdf2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory:
-  - quantity: 100
-    detail: {fileID: 11400000, guid: ffdc76bf1a2c8df4ca5d438a119b217a, type: 2}
-  - quantity: 25
-    detail: {fileID: 11400000, guid: 29b32cb11200d0e42a9bfab4fc4bfe6d, type: 2}
-  - quantity: 25
-    detail: {fileID: 11400000, guid: deef654d24e3b1542b37d07dbc890a7f, type: 2}
-  - quantity: 5
-    detail: {fileID: 11400000, guid: 5cf317c231c43ae4da62adf96e759328, type: 2}
-  - quantity: 36
-    detail: {fileID: 11400000, guid: fcc1b23c939a98b469eccbafe3c1d5d5, type: 2}
---- !u!114 &1160236595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160236591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3900d7cda0807d646b944959c75dfaea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemDetailsRef:
-    m_LabelString: item-detail
-  loadedItemsDisplay: []
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: ffdc76bf1a2c8df4ca5d438a119b217a, type: 2}
+    - {fileID: 11400000, guid: 29b32cb11200d0e42a9bfab4fc4bfe6d, type: 2}
+    - {fileID: 11400000, guid: deef654d24e3b1542b37d07dbc890a7f, type: 2}
+    - {fileID: 11400000, guid: d32593e766f2cdb40a0c75cc38903bcf, type: 2}
+    - {fileID: 11400000, guid: ede2306a1a04e6c4694c4c3e01414b93, type: 2}
+    - {fileID: 11400000, guid: 6a1f2ffa862dfbf4ba64bc3c7555f3af, type: 2}
+    - {fileID: 11400000, guid: ba0aa108ea1ca5740aba50543a953154, type: 2}
+    - {fileID: 11400000, guid: a4613e39f8b72f14681748dead80bd1b, type: 2}
+    - {fileID: 11400000, guid: 5cf317c231c43ae4da62adf96e759328, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: inventory
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Inventory.ItemInstance, Scripts]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 1|System.Inventory.ItemInstance, Scripts
+    - Name: detail
+      Entry: 10
+      Data: 0
+    - Name: <Quantity>k__BackingField
+      Entry: 3
+      Data: 100
+    - Name: traits
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|System.Inventory.ItemInstance, Scripts
+    - Name: detail
+      Entry: 10
+      Data: 1
+    - Name: <Quantity>k__BackingField
+      Entry: 3
+      Data: 100
+    - Name: traits
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|System.Inventory.ItemInstance, Scripts
+    - Name: detail
+      Entry: 10
+      Data: 2
+    - Name: <Quantity>k__BackingField
+      Entry: 3
+      Data: 10
+    - Name: traits
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|System.Inventory.ItemInstance, Scripts
+    - Name: detail
+      Entry: 10
+      Data: 3
+    - Name: <Quantity>k__BackingField
+      Entry: 3
+      Data: 1
+    - Name: traits
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|System.Inventory.ItemInstance, Scripts
+    - Name: detail
+      Entry: 10
+      Data: 4
+    - Name: <Quantity>k__BackingField
+      Entry: 3
+      Data: 1
+    - Name: traits
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|System.Inventory.ItemInstance, Scripts
+    - Name: detail
+      Entry: 10
+      Data: 8
+    - Name: <Quantity>k__BackingField
+      Entry: 3
+      Data: 20
+    - Name: traits
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &1393337493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1183975178226287089, guid: f9c50d221fb20b948802bafbf86070fd, type: 3}
@@ -545,9 +765,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b501fc341fa1ea468b8b485d5521638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: failedItem
+      Entry: 6
+      Data: 
   view: {fileID: 1393337500}
   inventory: {fileID: 1160236594}
-  itemDetailDictionary: {fileID: 1160236595}
 --- !u!4 &1710719728
 Transform:
   m_ObjectHideFlags: 0
@@ -623,6 +854,10 @@ PrefabInstance:
       propertyPath: craftingView
       value: 
       objectReference: {fileID: 1393337500}
+    - target: {fileID: 6174755187305994979, guid: f9c50d221fb20b948802bafbf86070fd, type: 3}
+      propertyPath: startingScreen
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -641,3 +876,4 @@ SceneRoots:
   - {fileID: 2092869268472849768}
   - {fileID: 1160236593}
   - {fileID: 1710719728}
+  - {fileID: 601181933}

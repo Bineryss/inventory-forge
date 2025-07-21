@@ -12,9 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8869983071f26419d505334709c470, type: 3}
   m_Name: Synthetic Metal
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 6a1f2ffa862dfbf4ba64bc3c7555f3af, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: traits
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: 601e468d-ebb7-4a4e-8af4-a68aa1dcad5b
   icon: SM
   description: 
   rarity: {fileID: 11400000, guid: 92c444cfc12ab0a48bbe974003e2aa7c, type: 2}
   characteristic: {fileID: 11400000, guid: 3f0eec7098538174c96c03365e232bd6, type: 2}
-  traits: []

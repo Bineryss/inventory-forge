@@ -12,8 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35f79f60890dc6429752e61cea0b971, type: 3}
   m_Name: The Explorer
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   id: a1767719-17c0-4038-bebc-b8764845a0f7
-  icon: THE
-  description: 
+  icon: THX
+  description: 'The Explorer is a modest spacecraft built for reliable interstellar
+    travel rather than luxury or speed. Her simple hull plating, reinforced with
+    standard durasteel bulkheads, glides steadily through vacuum and navigates asteroid
+    fields with dependable resilience.
+
+    
+
+    This no-frills vessel features
+    basic ion thrusters that provide efficient, if not impressive, propulsion through
+    the cosmos. The bridge is uncluttered and functional, with essential navigation
+    systems secured in practical configurations. A small observation deck offers
+    views of the stars, while the lower compartments provide cramped but adequate
+    living quarters for a minimal crew.'
   rarity: {fileID: 11400000, guid: 92c444cfc12ab0a48bbe974003e2aa7c, type: 2}
   someStats: 69
+  shipData: 

@@ -12,9 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8869983071f26419d505334709c470, type: 3}
   m_Name: Carbonate-7
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: a4613e39f8b72f14681748dead80bd1b, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: traits
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: ed8983ad-333a-43d9-8a1c-72c5db4608c2
   icon: C7
   description: 
   rarity: {fileID: 11400000, guid: 2e0da8d3d7e62b545951d036257c4e8c, type: 2}
   characteristic: {fileID: 11400000, guid: 3f0eec7098538174c96c03365e232bd6, type: 2}
-  traits: []

@@ -97,24 +97,46 @@ namespace System.Crafting
         {
             ICraftedItem result = craftingService.Evaluate(model.selection.ToDictionary(entry => entry.Key as ICraftingResource, entry => entry.Value));
             model.ConsumeSelection();
-            if (result == null) return;
+            if (result == null)
+            {
+                view.UpdateDetailData(new ItemDisplayDetailData()
+                {
+                    Icon = "XX",
+                    BgColor = Color.softRed,
+                    Name = "Failed",
+                    Description = "The provided materials couldn't be materialized into a ship"
+                });
+                return;
+            }
 
-            ItemInstance instance = new(result.Data);
+            ItemInstance instance = new(result.Data)
+            {
+                Traits = result.Traits.ToList(),
+            };
             model.Add(instance);
-            view.UpdateDetailData(new ItemDisplayDetailData()
+
+            ItemDisplayDetailData data = new()
             {
                 Icon = instance.Detail.Icon,
                 BgColor = instance.Detail.Quality.Color,
                 Name = instance.Detail.Name,
                 Description = instance.Detail.Description,
-                Effects = new List<TagDisplayData>()
+                Effects = instance.Traits.Select(trait => new TagDisplayData()
                 {
-                    new TagDisplayData() {
-                        Label = "some label",
-                        Color = Color.royalBlue
-                    }
-                }
-            });
+                    Label = trait.Label,
+                    Color = trait.Color
+                }).ToList()
+            };
+            if (result.Tier == CraftingOutcomeTier.BRITTEL) //TODO add BRITTLE to ItemInstance maybe actual Trait?
+            {
+                data.Effects.Add(new TagDisplayData()
+                {
+                    Color = Color.brown,
+                    Label = "Brittel"
+                });
+            }
+
+            view.UpdateDetailData(data);
         }
 
         #region builder

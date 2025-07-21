@@ -12,9 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8869983071f26419d505334709c470, type: 3}
   m_Name: Poly Carbonat
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: traits
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: 61a21ee3-6c34-489c-ad2f-ff4d422cf6e8
   icon: PC
   description: 
   rarity: {fileID: 11400000, guid: 2e0da8d3d7e62b545951d036257c4e8c, type: 2}
-  characteristic: {fileID: 11400000, guid: 3f0eec7098538174c96c03365e232bd6, type: 2}
-  traits: []
+  characteristic: {fileID: 11400000, guid: a05184252602a6545a1904af069442cc, type: 2}

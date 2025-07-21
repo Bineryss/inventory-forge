@@ -22,6 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   id: ae3af49b-08a3-4f4c-959f-66083b803f5e
-  label: 
-  description: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  label: Dense
+  description: Ultra-heavy materials with gravitational anomalies that reinforce
+    structure while creating drag.
+  color: {r: 0.20392157, g: 0.28627452, b: 0.36862746, a: 1}

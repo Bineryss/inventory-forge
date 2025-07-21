@@ -41,7 +41,7 @@ namespace System.Inventory
             horizontalList = new(() =>
             {
                 TagElement element = new();
-                element.style.marginRight = 4;
+                element.style.marginRight = 16;
                 return element;
             },
             (element, data) =>

@@ -26,12 +26,11 @@ namespace System.Crafting
         private ICraftedItem CreateShip(IItemDetail detail, int requiredMinQuality, int quality, List<ITrait> traits)
         {
             CraftingOutcomeTier tier = requiredMinQuality <= quality ? CraftingOutcomeTier.STABLE : CraftingOutcomeTier.BRITTEL;
-
             return new ShipInstance()
             {
                 Data = detail,
                 Traits = traits,
-                Tier = tier
+                Tier = tier,
             };
         }
 
@@ -53,13 +52,14 @@ namespace System.Crafting
 
             if (!itemCreation.TryGetValue(recipe.OutputType, out var createItem))
             {
-                Debug.Log("Couldn't find a matching creatin method");
+                Debug.Log("Couldn't find a matching creation method");
                 return failedCrafting;
             }
 
             int evaluatedQuality = materials.Keys.Sum(resource => resource.QualityScore) / materials.Count();
+            List<ITrait> collectedTrait = materials.Keys.SelectMany(resource => resource.Traits).Distinct().ToList();
 
-            ICraftedItem item = createItem(recipe.OutputData, recipe.MinimumQuality, evaluatedQuality, null);
+            ICraftedItem item = createItem(recipe.OutputData, recipe.MinimumQuality, evaluatedQuality, collectedTrait);
             return item;
         }
 

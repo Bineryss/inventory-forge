@@ -12,9 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8869983071f26419d505334709c470, type: 3}
   m_Name: Graphen
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: traits
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: 19a78d13-43cb-4140-ab33-b333bd7b94a9
   icon: G
   description: 
   rarity: {fileID: 11400000, guid: 8b3dcf042a2891e4da19915085d615c7, type: 2}
   characteristic: {fileID: 11400000, guid: a05184252602a6545a1904af069442cc, type: 2}
-  traits: []

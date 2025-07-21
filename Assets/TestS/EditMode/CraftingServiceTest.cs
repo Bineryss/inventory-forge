@@ -61,6 +61,23 @@ namespace Crafting
             Assert.That(actual.Tier, Is.EqualTo(expectedTier));
         }
 
+        [Test]
+        public void ShouldReturnCorretTraits()
+        {
+            CraftingService service = new(recipes, failedItem);
+            var materials = new Dictionary<ICraftingResource, int>()
+            {
+                {CreateMaterial("A",5,new(){"01"}),2},
+                {CreateMaterial("B",5,new(){"02" }),2},
+            };
+
+            ICraftedItem result = service.Evaluate(materials);
+            List<string> traitIds = result.Traits.Select(trait => trait.Id).ToList();
+
+            Assert.That(traitIds, Contains.Item("01"));
+            Assert.That(traitIds, Contains.Item("02"));
+            Assert.That(traitIds, Has.Count.EqualTo(2));
+        }
         public static IEnumerable<TestCaseData> RecipeTestData()
         {
             IItemDetail failedDetail = Substitute.For<IItemDetail>();
@@ -133,15 +150,29 @@ namespace Crafting
         }
 
 
-        public static ICraftingResource CreateMaterial(string characteristic = default, int quality = 5)
+        public static ICraftingResource CreateMaterial(string characteristic = default, int quality = 5, List<string> traits = default)
         {
             ICharacteristic characteristicMock = CreateCharacteristic(characteristic);
-            ITrait traitMock = Substitute.For<ITrait>();
+            List<ITrait> traitMock = CreateTraitsMock(traits);
             ICraftingResource material = Substitute.For<ICraftingResource>();
             material.Characteristic.Returns(characteristicMock);
             material.QualityScore.Returns(quality);
-            material.Traits.Returns(new List<ITrait>() { traitMock });
+            material.Traits.Returns(traitMock);
             return material;
+        }
+
+        private static List<ITrait> CreateTraitsMock(List<string> traits = default)
+        {
+            if (traits == null) return new();
+            return traits.Select(trait => CreateTraitMock(trait)).ToList();
+        }
+
+        private static ITrait CreateTraitMock(string trait)
+        {
+            ITrait traitMock = Substitute.For<ITrait>();
+            traitMock.Id.Returns(trait);
+
+            return traitMock;
         }
 
         public static ICharacteristic CreateCharacteristic(string characteristic = default)

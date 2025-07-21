@@ -53,6 +53,7 @@
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     height: 2px;
+    flex-grow: initial;
 }
 
 .text-xl {
@@ -70,7 +71,6 @@
     padding-left: 0;
 }
 
-/* Remove default item styles */
 .unity-list-view__item {
     background-color: transparent;
     border-color: transparent;
@@ -80,17 +80,14 @@
     min-height: initial;
 }
 
-/* Remove selection background */
 .unity-list-view__item--selected {
     background-color: transparent;
 }
 
-/* Remove hover effects */
 .unity-list-view__item:hover {
     background-color: transparent;
 }
 
-/* Remove alternating row backgrounds */
 .unity-collection-view__item--alternative-background {
     background-color: transparent;
 }

@@ -12,9 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8869983071f26419d505334709c470, type: 3}
   m_Name: Nano Plating
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 6a1f2ffa862dfbf4ba64bc3c7555f3af, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: traits
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[System.Item.ITrait, Scripts]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   id: 1a276359-7823-4805-8dea-8cb56cc44242
   icon: NP
   description: 
   rarity: {fileID: 11400000, guid: 7e0c3891cc1000e47bd8faefa8efc81a, type: 2}
   characteristic: {fileID: 11400000, guid: a05184252602a6545a1904af069442cc, type: 2}
-  traits: []
