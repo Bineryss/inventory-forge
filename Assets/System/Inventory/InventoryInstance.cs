@@ -9,17 +9,17 @@ namespace System.Inventory
     {
         private string id;
         public string Id => id == null || "".Equals(id) ? (id = Guid.NewGuid().ToString()) : id; // necessary because of unity
-        public int quantity = 1;
-        [SerializeField] private ItemDetail detail;
+        [SerializeField] public int quantity = 1;
+        [SerializeField] private IItemDetail detail;
 
         public IItemDetail Detail => detail;
+        public int Quantity => quantity;
 
-        public ItemInstance(IItemDetail detail) => this.detail = detail as ItemDetail;
-        public ItemInstance(ItemInstance copy)
+        public ItemInstance() { }
+        public ItemInstance(IItemDetail detail, int quantity = 1)
         {
-            id = copy.Id;
-            quantity = copy.quantity;
-            detail = copy.detail;
+            this.detail = detail;
+            this.quantity = quantity;
         }
 
         //future

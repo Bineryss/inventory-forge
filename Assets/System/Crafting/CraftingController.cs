@@ -84,7 +84,7 @@ namespace System.Crafting
                 Id = item.Id,
                 Icon = item.Detail.Icon,
                 BgColor = item.Detail.Quality.Color,
-                Quantity = item.quantity
+                Quantity = item.Quantity
             }).ToList());
         }
 

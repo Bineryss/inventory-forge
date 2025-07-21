@@ -57,7 +57,7 @@ namespace System.Inventory
             view.UpdateData(model.items.Select(item => new ItemDisplayData()
             {
                 Id = item.Id,
-                Quantity = item.quantity,
+                Quantity = item.Quantity,
                 Icon = item.Detail.Icon,
                 BgColor = item.Detail.Quality.Color,
                 Order = item.Detail.Quality.Score

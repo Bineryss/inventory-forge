@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace System.Inventory
@@ -9,11 +11,11 @@ namespace System.Inventory
         ObservableList<ItemInstance> DataSource { get; }
     }
 
-    public class InventoryDataSource : MonoBehaviour, IInventoryDataSource
+    public class InventoryDataSource : SerializedMonoBehaviour, IInventoryDataSource
     {
         private static ObservableList<ItemInstance> dataSource;
 
-        [SerializeField] private List<ItemInstance> inventory = new();
+        [OdinSerialize] private List<ItemInstance> inventory = new();
         public ObservableList<ItemInstance> DataSource => dataSource ??= new ObservableList<ItemInstance>(inventory);
 
         [ContextMenu("Refresh Data")]
@@ -22,6 +24,4 @@ namespace System.Inventory
             dataSource.Invoke();
         }
     }
-
-
 }

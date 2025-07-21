@@ -29,9 +29,9 @@ namespace System.Crafting
             ItemInstance data = inventory.FirstOrDefault(item => id.Equals(item.Id));
             if (data == null) return null;
 
-            data.quantity += quantityDelta;
+            data.Quantity += quantityDelta;
 
-            if (data.quantity == 0)
+            if (data.Quantity == 0)
             {
                 inventory.Remove(data);
             }
@@ -102,7 +102,7 @@ namespace System.Crafting
             }
             else
             {
-                inventory.Add(new ItemInstance(item) { quantity = quantity });
+                inventory.Add(new ItemInstance(item, quantity));
             }
         }
 

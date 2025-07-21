@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -7,16 +9,14 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace System.Item
 {
-    public class ItemDetailDictionary : MonoBehaviour, IItemDetailService
+    public class ItemDetailDictionary : SerializedMonoBehaviour, IItemDetailService
     {
-        private Dictionary<string, IItemDetail> dataSource;
+        [OdinSerialize] private Dictionary<string, IItemDetail> dataSource;
         public Dictionary<string, IItemDetail> DataSource => dataSource ??= loadedItems.ToDictionary(el => el.Id);
         private readonly List<IItemDetail> loadedItems = new();
 
         [Header("Data")]
         [SerializeField] private AssetLabelReference itemDetailsRef;
-        [SerializeField] private List<ItemDetail> loadedItemsDisplay = new(); //only for editor, maybe build custom property drawer in futur
-        [SerializeField] private List<ShipDetail> loadedShipsDisplay = new(); //only for editor, maybe build custom property drawer in futur
 
         [ContextMenu("Refresh Data")]
         void RefreshDataSource()
@@ -47,8 +47,6 @@ namespace System.Item
             }
 
             dataSource = handler.Result.ToDictionary(el => el.Id);
-            loadedItemsDisplay = loadedItems.Cast<ItemDetail>().ToList();
-            loadedShipsDisplay = loadedItemsDisplay.Where(el => el is ShipDetail).Select(el => el as ShipDetail).ToList();
 
             Debug.Log("✅ Initialized item details");
         }
