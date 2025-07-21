@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Item Detail Data
+  m_Name: Packed Assets
   m_EditorClassIdentifier: 
-  m_GroupName: Item Detail Data
-  m_GUID: e45ea7612347ae14687c57c743d1be99
+  m_GroupName: Packed Assets
+  m_GUID: 921fe878681573148a349cfd1b0f81cb
   m_SerializeEntries:
   - m_GUID: 7ebea9ed39f4fe647ba491e8f7a51e28
     m_Address: Assets/System/Item/Details
@@ -21,9 +21,15 @@ MonoBehaviour:
     m_SerializedLabels:
     - item-detail
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91af66071791a6548876df6b5af1c2dc
+    m_Address: Assets/System/Crafting/Recipes
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - recipes
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e4cd554c78f0cdf4faed7996a3919fdc, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 33d3425c81552f64e8e89c69c3e91bf0, type: 2}
-    - {fileID: 11400000, guid: 993359ce1d618704e88bd5278251f307, type: 2}
+    - {fileID: 11400000, guid: 578a19ae04fd8414ab47bcebfafa28a1, type: 2}
+    - {fileID: 11400000, guid: ea792dde09c1f4649a004aef9b59f700, type: 2}

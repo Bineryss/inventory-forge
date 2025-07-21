@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Item;
 using UnityEngine;
 
@@ -9,23 +8,21 @@ namespace System.Inventory
     {
         private string id;
         public string Id => id == null || "".Equals(id) ? (id = Guid.NewGuid().ToString()) : id; // necessary because of unity
-        [SerializeField] public int quantity = 1;
         [SerializeField] private IItemDetail detail;
 
         public IItemDetail Detail => detail;
-        public int Quantity => quantity;
+        [field: SerializeField] public int Quantity { get; set; } = 1;
 
         public ItemInstance() { }
-        public ItemInstance(IItemDetail detail, int quantity = 1)
+        public ItemInstance(IItemDetail detail)
         {
             this.detail = detail;
-            this.quantity = quantity;
         }
 
         //future
-        private List<ITrait> traits;
-        private ItemInstance equipedWeapon; //only viable if type == SHIP
-                                            //    private Type type => detail.Type
+        // private List<ITrait> traits;
+        // private ItemInstance equipedWeapon; //only viable if type == SHIP
+        //    private Type type => detail.Type
     }
 
 }

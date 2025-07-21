@@ -43,9 +43,9 @@ namespace System.Crafting
             return data;
         }
 
-        public void Add(IItemDetail data)
+        public void Add(ItemInstance instance)
         {
-            inventory.Add(new ItemInstance(data));
+            inventory.Add(instance);
         }
 
         public void SelectItem(string id, int quantity = 1) // ItemInstance Id
@@ -102,9 +102,14 @@ namespace System.Crafting
             }
             else
             {
-                inventory.Add(new ItemInstance(item, quantity));
+                inventory.Add(new ItemInstance(item) { Quantity = quantity });
             }
         }
 
+        public void ConsumeSelection()
+        {
+            selection.Clear();
+            OnSelectionChanged.Invoke(selection);
+        }
     }
 }

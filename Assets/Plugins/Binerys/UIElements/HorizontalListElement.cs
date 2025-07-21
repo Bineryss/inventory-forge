@@ -24,8 +24,8 @@ namespace UIElements
 
             pool = new(
             createItem,
-            item => { row.Add(item); item.style.display = DisplayStyle.None; activeElements.Add(item); },
-            item => { row.Remove(item); activeElements.Remove(item); },
+            item => { row.Add(item); item.style.display = DisplayStyle.None; },
+            item => { row.Remove(item); },
             destroyItem,
             true,
             defaultCapacity,
@@ -42,21 +42,22 @@ namespace UIElements
             }
 
             int minLength = Math.Min(activeElements.Count, data.Count);
-
             for (int i = 0; i < minLength; i++)
             {
                 updateItem(activeElements[i], data[i]);
             }
 
-            for (int i = minLength; i < activeElements.Count; i++)
+            for (int i = activeElements.Count - 1; i >= minLength; i--)
             {
                 var element = activeElements[i];
                 pool.Release(element);
+                activeElements.RemoveAt(i);
             }
 
             for (int i = minLength; i < data.Count; i++)
             {
                 var element = pool.Get();
+                activeElements.Add(element);
                 updateItem(element, data[i]);
                 element.style.display = DisplayStyle.Flex;
             }

@@ -5,6 +5,7 @@ using System.Inventory;
 using System.Item;
 using System.Linq;
 using UnityEngine;
+using Utility;
 
 namespace System.Crafting
 {
@@ -14,15 +15,18 @@ namespace System.Crafting
         private readonly CraftingModel model;
         private readonly CraftingView view;
         private readonly IItemDetailService itemDetailDictionary;
+        private readonly CraftingService craftingService;
 
-        private CraftingController(CraftingView view, CraftingModel model, IItemDetailService itemDetailDictionary)
+        private CraftingController(CraftingView view, CraftingModel model, IItemDetailService itemDetailDictionary, CraftingService craftingService)
         {
             Debug.Assert(view != null, "View is null");
             Debug.Assert(model != null, "Model is null");
             Debug.Assert(itemDetailDictionary != null, "ItemDetailDict is null");
+            Debug.Assert(craftingService != null, "CraftingService is null");
             this.view = view;
             this.model = model;
             this.itemDetailDictionary = itemDetailDictionary;
+            this.craftingService = craftingService;
 
             view.StartCoroutine(Initialize());
         }
@@ -90,7 +94,14 @@ namespace System.Crafting
 
         private void HandleCraftingClick()
         {
-            Debug.Log("start crafting");
+            ICraftedItem result = craftingService.Evaluate(model.selection.ToDictionary(entry => entry.Key as ICraftingResource, entry => entry.Value));
+            model.ConsumeSelection();
+            if (result == null) return;
+
+            ItemInstance instance = new ItemInstance(result.Data);
+
+            Debug.Log($"crafting result: {result.Data.Name}");
+            // model.Add(instance);
         }
 
         #region builder
@@ -99,6 +110,7 @@ namespace System.Crafting
             private CraftingView view;
             private ItemDetailDictionary itemDetailDictionary;
             private IInventoryDataSource inventoryDS;
+            private CraftingService cs;
 
             public Builder WithView(CraftingView view)
             {
@@ -118,13 +130,19 @@ namespace System.Crafting
                 return this;
             }
 
+            public Builder WithCraftingService(CraftingService service)
+            {
+                cs = service;
+                return this;
+            }
+
             public CraftingController Build()
             {
                 CraftingModel model = inventoryDS != null
                 ? new CraftingModel(inventoryDS.DataSource)
                 : new CraftingModel(new ObservableList<ItemInstance>());
 
-                return new CraftingController(view, model, itemDetailDictionary);
+                return new CraftingController(view, model, itemDetailDictionary, cs);
             }
 
 

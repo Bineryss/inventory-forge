@@ -1,10 +1,11 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Utility
 {
-    public abstract class ScriptableObjectWithId : ScriptableObject
+    public abstract class ScriptableObjectWithId : SerializedScriptableObject
     {
-        [SerializeField] protected string id = System.Guid.NewGuid().ToString();
+        [SerializeField, ReadOnly] protected string id = System.Guid.NewGuid().ToString();
 
         private void OnValidate()
         {

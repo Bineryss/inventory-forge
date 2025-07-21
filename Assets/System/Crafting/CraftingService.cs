@@ -78,14 +78,6 @@ namespace System.Crafting
         int QualityScore { get; }
     }
 
-    public interface ICraftingRecipe
-    {
-        Dictionary<ICharacteristic, int> RequiredCharacteristics { get; }
-        int MinimumQuality { get; }
-        IItemDetail OutputData { get; }
-        CraftedItemType OutputType { get; }
-    }
-
     public interface ICraftedItem
     {
         IItemDetail Data { get; }

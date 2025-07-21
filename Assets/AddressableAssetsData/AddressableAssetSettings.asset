@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: e45ea7612347ae14687c57c743d1be99
+  m_DefaultGroup: 921fe878681573148a349cfd1b0f81cb
   m_currentHash:
     serializedVersion: 2
-    Hash: 1d4a08050873c02b6878a16d7d8bd9bb
+    Hash: 4080bb86820bd9036b5a0c649b03eb24
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
-  - {fileID: 11400000, guid: f3ceb470ce015d244b75186ab3a02916, type: 2}
+  - {fileID: 11400000, guid: 79a5dd28bd7b28c4daea0ff4ed80c57c, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
@@ -100,6 +100,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - item-detail
+    - recipes
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 481bb9682aa7d454cb5a131e461396b5, type: 2}
